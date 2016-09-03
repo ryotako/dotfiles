@@ -6,6 +6,11 @@ augroup END
 " for Japanese comment
 set encoding=utf-8
 scriptencoding utf-8
+" 古いvimではvimrcを読まない
+if v:version < 700
+    echoerr 'This _vimrc requires Vim 7 or later.'
+    quit
+endif
 " メニューを表示しない. syntax on, filetype onより前に書く
 set guioptions+=M
 " }}}1
@@ -53,24 +58,22 @@ NeoBundle 'Shougo/neco-syntax'
 NeoBundle 'ujihisa/neco-look'
 
 " extend basic vim commands {{{2
-NeoBundle 'Konfekt/FastFold'
 NeoBundle 'LeafCage/foldCC.vim'
 NeoBundle 'LeafCage/yankround.vim'
 NeoBundle 'easymotion/vim-easymotion'
-NeoBundle 'haya14busa/incsearch-migemo.vim'
 NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'kana/vim-niceblock' " v & V modes behave as <C-v>
 NeoBundle 'kana/vim-submode'
 NeoBundle 'osyo-manga/vim-anzu'
+NeoBundle 'osyo-manga/vim-brightest'
 NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'sjl/gundo.vim'
-" NeoBundle 'taku-o/vim-ro-when-swapfound'
 NeoBundle 'thinca/vim-visualstar'
-NeoBundle 'tpope/vim-repeat'
+NeoBundle 'Tpope/Vim-Repeat'
 NeoBundle 'vim-jp/vimdoc-ja'
-NeoBundle 'osyo-manga/vim-brightest'
+NeoBundle 'terryma/vim-expand-region'
 
 " operator {{{2
 NeoBundle 'kana/vim-operator-user'
@@ -206,6 +209,7 @@ set softtabstop=2 " 連続した空白をカーソルで移動する際の移動
 set autoindent    " 改行時にインデントを継続
 set smartindent   " 入力内容に合わせたインデントの増減
 set breakindent   " wrapした文章もインデントして表示
+set formatoptions-=ro " 改行時にコメントアウトしない設定，のはずだが動作しない
 
 " カーソル移動等
 set backspace=indent,eol,start " 行をまたぐバックスペースを有効化
@@ -503,6 +507,14 @@ nmap <expr> gP yankround#is_active() ? "\<Plug>(yankround-next)" : "\<Plug>(yank
 " Sはccと機能が重複するので潰す
 nmap S <Plug>(operator-replace)
 
+" visual select (expand-region)
+" v連打で選択範囲を拡大する．visualモードを抜けるときは<ESC>
+" expandしていくうちに行単位選択モードになるので，Vを潰しても不便はない．
+" <ESC>gvで待ち状態を解除して普通のvisualモードにする．
+vmap v <Plug>(expand_region_expand)<Plug>(region_reselect)
+vmap V <Plug>(expand_region_shrink)<Plug>(region_reselect)
+noremap <expr><Plug>(region_reselect) mode() == 'n' ? '' : "\<ESC>gv"
+let g:expand_region_text_objects = {'i]':1,'ib':1,'iB':1,'il':1,'ip':1,'ie':1,}
 
 " undo (gundo) {{{2
 let g:gundo_right = 1

@@ -13,6 +13,9 @@ PS1=' \W '
 shopt -s globstar
 shopt -s autocd
 
+# default option
+alias ls='ls -U'
+
 # Basic Command
 alias c='clear'
 alias q='exit'
