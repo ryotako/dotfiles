@@ -2,8 +2,8 @@
 " cd $HOME
 set cmdheight=1
 set guioptions-=mTlL
-" set guicursor=a:blinkon0
-inoremap \ \
+set guicursor=a:blinkon0
+" inoremap \ \
 " ¥ マークと別に\があるキーボードのため．
 "}}}
 

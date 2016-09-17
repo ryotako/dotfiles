@@ -1,18 +1,17 @@
 " start up {{{1
-" reset augroup
+" for Japanese comments
+set encoding=utf-8
+scriptencoding utf-8
+" vimrc専用augroupの作成と初期化
 augroup vimrc
   autocmd!
 augroup END
-" for Japanese comment
-set encoding=utf-8
-scriptencoding utf-8
 " 古いvimではvimrcを読まない
 if v:version < 700
-    echoerr 'This _vimrc requires Vim 7 or later.'
-    quit
+  echoerr 'This _vimrc requires Vim 7 or later.'
+  quit
 endif
-" メニューを表示しない. syntax on, filetype onより前に書く
-set guioptions+=M
+set guioptions+=M " メニューを表示しない. syntax on, filetype onより前に書く
 " }}}1
 
 " NeoBundle {{{1
@@ -58,72 +57,71 @@ NeoBundle 'Shougo/neco-syntax'
 NeoBundle 'ujihisa/neco-look'
 
 " extend basic vim commands {{{2
-NeoBundle 'LeafCage/foldCC.vim'
-NeoBundle 'LeafCage/yankround.vim'
-NeoBundle 'easymotion/vim-easymotion'
-NeoBundle 'haya14busa/incsearch.vim'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'kana/vim-niceblock' " v & V modes behave as <C-v>
-NeoBundle 'kana/vim-submode'
-NeoBundle 'osyo-manga/vim-anzu'
-NeoBundle 'osyo-manga/vim-brightest'
-NeoBundle 'osyo-manga/vim-over'
-NeoBundle 'rhysd/clever-f.vim'
-NeoBundle 'sjl/gundo.vim'
-NeoBundle 'thinca/vim-visualstar'
-NeoBundle 'Tpope/Vim-Repeat'
-NeoBundle 'vim-jp/vimdoc-ja'
-NeoBundle 'terryma/vim-expand-region'
+NeoBundle 'Konfekt/FastFold'          " neocompleteしながら折畳みするために
+NeoBundle 'LeafCage/foldCC.vim'       " 見やすい折りたたみ表示
+NeoBundle 'LeafCage/yankround.vim'    " ヤンク履歴を管理
+NeoBundle 'easymotion/vim-easymotion' " 4ストローク以内で移動
+NeoBundle 'haya14busa/incsearch.vim'  " 検索中に対象をハイライト
+NeoBundle 'itchyny/lightline.vim'     " ステータスライン拡張
+NeoBundle 'kana/vim-niceblock'        " ビジュアルモードのI,Aの挙動を矩形選択に
+NeoBundle 'kana/vim-submode'          " 連打を便利に
+NeoBundle 'osyo-manga/vim-anzu'       " 検索の一致件数を取得
+NeoBundle 'osyo-manga/vim-brightest'  " カーソル下と同じ単語をハイライト
+NeoBundle 'osyo-manga/vim-over'       " 置換対象をハイライト
+NeoBundle 'rhysd/clever-f.vim'        " fの検索後，f連打で次の一致箇所へ
+NeoBundle 'sjl/gundo.vim'             " undo履歴の可視化
+NeoBundle 'terryma/vim-expand-region' " 選択範囲の拡大・縮小
+NeoBundle 'thinca/vim-visualstar'     " ビジュアル選択した文字列を検索
+NeoBundle 'tpope/vim-repeat'          " 動作をリピート可能にする機構を提供
+NeoBundle 'vim-jp/vimdoc-ja'          " 日本語ヘルプ
 
 " operator {{{2
-NeoBundle 'kana/vim-operator-user'
-NeoBundle 'thinca/vim-operator-sequence'
+NeoBundle 'kana/vim-operator-user'         " operator自作のための機構
+NeoBundle 'thinca/vim-operator-sequence'   " 複数operatorの統合
 
-NeoBundle 'haya14busa/vim-operator-flashy' " y
-NeoBundle 'kana/vim-operator-replace'      " S
-NeoBundle 'tyru/operator-camelize.vim'     " _
+NeoBundle 'haya14busa/vim-operator-flashy' " y: ヤンクを可視化
+NeoBundle 'kana/vim-operator-replace'      " S: レジスタから貼付け
+NeoBundle 'tyru/operator-camelize.vim'     " _: キャメル・スネークケース入替え
 
 " text object {{{2
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'osyo-manga/vim-textobj-blockwise'  " builtin-textobjを矩形選択モードに拡張 dIw
-
-NeoBundle 'kana/vim-textobj-entire'           " textobj a (all, e -> environment)
-NeoBundle 'kana/vim-textobj-fold'             " textobj z
-NeoBundle 'kana/vim-textobj-indent'           " textobj i,I
-NeoBundle 'kana/vim-textobj-line'             " textobj l
-NeoBundle 'h1mesuke/textobj-wiw'              " textobj v (v+v = w)
-NeoBundle 'mattn/vim-textobj-url'             " textobj u
-NeoBundle 'osyo-manga/vim-textobj-multiblock' " textobj b
-NeoBundle 'thinca/vim-textobj-between'        " textobj f{char}
-NeoBundle 'thinca/vim-textobj-comment'        " textobj /
 " builtin w, W, s, p, [, ], (,), <, >, {, }, ", ', `
 " replace q('), d(")
 " vimtex  e, d, c, $, m(math, m=$)
-" unused  g, h, j, k, n, o, r, t, x, z
+NeoBundle 'kana/vim-textobj-user'             " textob自作のための機構
+
+NeoBundle 'kana/vim-textobj-entire'           " a: 全て (all, e -> environment)
+NeoBundle 'osyo-manga/vim-textobj-multiblock' " b: 囲まれた範囲
+NeoBundle 'kana/vim-textobj-fold'             " z: 折畳みの範囲
+NeoBundle 'kana/vim-textobj-indent'           " i: 字下げの範囲
+NeoBundle 'kana/vim-textobj-line'             " l: 行
+NeoBundle 'h1mesuke/textobj-wiw'              " v: スネークケースの一部 (v+v=w)
+NeoBundle 'mattn/vim-textobj-url'             " u: URL
+NeoBundle 'thinca/vim-textobj-comment'        " /: コメント
 
 " scripting {{{2
-NeoBundle 'LeafCage/vimhelpgenerator'
-NeoBundle 'koron/codic-vim'
-NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'cohama/lexima.vim'         " 対括弧補完
+NeoBundle 'LeafCage/vimhelpgenerator' " vimプラグインヘルプ生成
+NeoBundle 'junegunn/vim-easy-align'   " 位置揃え
+NeoBundle 'koron/codic-vim'           " プログラマ向け辞書
+NeoBundle 'tpope/vim-commentary'      " quasi-operator gc: comment/uncomment line
+NeoBundle 'tpope/vim-surround'        " quasi-textobj  s:  change/delete surroundings
+
 NeoBundle 'thinca/vim-prettyprint'
 NeoBundle 'tyru/capture.vim'
 
-" writing {{{2
-NeoBundle 'junegunn/vim-easy-align'
-NeoBundle 'tpope/vim-commentary' " quasi-operator gc: comment/uncomment line
-NeoBundle 'tpope/vim-surround'   " quasi-textobj  s:  change/delete surroundings
-" NeoBundle 'cohama/lexima.vim' IMEの日本語入力に干渉する
-
 " external tools {{{2
 " git
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'cohama/agit.vim'
-NeoBundle 'kmnk/vim-unite-giti' " This plugin does not refer buffer dir but current dir
-" NeoBundle 'rhysd/committia.vim'
-" NeoBundle 'idanarye/vim-merginal'
-NeoBundle 'lambdalisue/vim-gista'
-NeoBundle 'lambdalisue/vim-gista-unite'
+NeoBundle 'tpope/vim-fugitive' " vimからgit
+NeoBundle 'cohama/agit.vim'    " commit履歴を可視化
+NeoBundle 'mattn/gist-vim'     " gistにアクセス
+NeoBundle 'mattn/webapi-vim'   " gist-vimのために必要
 
+
+" language support {{{2
+" markdown
+NeoBundle 'plasticboy/vim-markdown'
+" go
+NeoBundle 'fatih/vim-go'
 " tex
 NeoBundle 'lervag/vimtex'
 " NeoBundle 'termoshtt/unite-bibtex'
@@ -135,17 +133,15 @@ NeoBundle 'glidenote/memolist.vim'
 
 " colorscheme {{{2
 NeoBundle 'cocopon/iceberg.vim'        " 黒地青基調．
-NeoBundle 'popkirby/lightline-iceberg' " lightlineのカラースキーム
-NeoBundle 'itchyny/landscape.vim'   " qf, quickrun, unite, vimfiler, vimshellの色設定
+NeoBundle 'popkirby/lightline-iceberg' " lightlineのiceberg
+" NeoBundle 'itchyny/landscape.vim'      " qf, quickrun, unite, vimfiler, vimshellの色設定
 NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'djjcast/mirodark'
-NeoBundle 'jpo/vim-railscasts-theme'
-" NeoBundle 'marlun/vim-starwars'
 
 " others {{{2
 NeoBundle 'leseixas/quantum_espresso-vim'
 NeoBundle 'benjifisher/Vim-Plugin-for-Drupal'
 NeoBundle 'mhaig/vim-blockdiag-series'
+NeoBundle 'AndrewRadev/switch.vim'
 
 " my plugins
 NeoBundle 'ryotako/unite-latex-package',
@@ -162,11 +158,11 @@ NeoBundleCheck
 
 " Basic {{{1
 
-" 文字コード・改行コード
-set fileencodings=utf-8,shift_jis " この順番が必須
-set fileformat=unix               " 改行コードを<LF>に
-set spelllang=en,cjk              " アジア圏言語をスペルミス判定しない
-" 日本語入力のための設定
+" 文字コード・日本語入力等
+set encoding=utf-8
+set fileencodings=cp932,sjis,euc-jp,utf-8
+set fileformat=unix   " 改行コードを<LF>に
+set spelllang=en,cjk  " アジア圏言語をスペルミス判定しない
 set formatoptions=q   " 勝手に改行させない
 set ambiwidth=double  " 文字幅が判別できない時は全角扱い
 set display+=lastline " 長い行を省略しない
@@ -199,17 +195,21 @@ set showmatch         " 対応括弧表示
 set showtabline=2     " 常にタブ行を表示
 set splitbelow        " ウィンドウは下に分割
 set splitright        " ウィンドウは右に分割
+set wildmenu          " ステータスラインに補完候補を並べる
 set wrap              " 長い行の折り返し
+set colorcolumn=+1
+set textwidth=80
+set listchars=tab:>-,trail:-
 
 " インデントの設定
-set expandtab     " タブを入力時に空白に展開
-set tabstop=2     " タブの表示幅
-set shiftwidth=2  " 自動インデントが挿入するタブ幅
-set softtabstop=2 " 連続した空白をカーソルで移動する際の移動幅
-set autoindent    " 改行時にインデントを継続
-set smartindent   " 入力内容に合わせたインデントの増減
-set breakindent   " wrapした文章もインデントして表示
-set formatoptions-=ro " 改行時にコメントアウトしない設定，のはずだが動作しない
+set expandtab         " タブを入力時に空白に展開
+set tabstop=2         " タブの表示幅
+set shiftwidth=2      " 自動インデントが挿入するタブ幅
+set softtabstop=2     " 連続した空白をカーソルで移動する際の移動幅
+set autoindent        " 改行時にインデントを継続
+set smartindent       " 入力内容に合わせたインデントの増減
+set breakindent       " wrapした文章もインデントして表示
+set formatoptions-=ro " 改行時にコメントアウトしない設定 oによる挿入は別
 
 " カーソル移動等
 set backspace=indent,eol,start " 行をまたぐバックスペースを有効化
@@ -225,26 +225,24 @@ set incsearch  " 検索文字列が入力途中の段階から検索
 set hlsearch   " 検索文字列のハイライト
 
 " カラースキーム & lightline
-" let scheme = 'iceberg'
-let scheme = has('gui_running') ? 'stonewashed-gui' : 'stonewashed-256'
-execute 'colorscheme '.scheme
-execute 'autocmd vimrc GUIEnter * nested colorscheme '.scheme
+let s:cui_colorscheme = 'stonewashed-256'
+let s:gui_colorscheme = 'stonewashed-gui'
+let s:lightline_color = 'solarized'
 
-" lightline
-if !has('gui_running')
-  set t_Co=256
-endif
-" let g:lightline = {'colorscheme' : 'iceberg'}
-let g:lightline = {'colorscheme' : 'solarized'}
+let s:scheme = has('gui_running') && len(s:gui_colorscheme) 
+      \ ? s:gui_colorscheme : s:cui_colorscheme
+execute 'colorscheme '.s:scheme
+execute 'autocmd vimrc GUIEnter * nested set t_Co=256 | colorscheme '.s:scheme
+let g:lightline = {'colorscheme' : s:lightline_color}
 let g:lightline.component = {'lineinfo': '%3l[%L]:%-2v'}
 
 " その他
 set modeline          " コメントでvimに指示を出す
 set notimeout         " タイムアウトを無効
 set hidden            " quit時にバッファを削除せず，隠す
-set confirm           " 変更されたバッファがあるとき，確認
+" set confirm           " 変更されたバッファがあるとき，確認
 set switchbuf=useopen " すでに開いているバッファがあれば，それを開く
-
+set keywordprg=:help  " K は:! manではなく:help
 " }}}
 
 " Key Mapping {{{
@@ -276,6 +274,19 @@ noremap  <DOWN> gj
 noremap  <UP>   gk
 inoremap <DOWN> <ESC>gja
 inoremap <UP>   <ESC>gka
+
+" インデント変更の連続実行
+" ドットリピートでもできるが，これは選択された状態が持続する
+vnoremap < <gv
+vnoremap > >gv
+
+
+" 行挿入
+" nnoremap o o <C-u>
+" nnoremap O O <C-u>
+
+
+
 
 " Ctrlとの同時押しでノーマルモードで改行・削除
 noremap  <C-CR> i<CR><ESC>
@@ -333,6 +344,16 @@ endfunction
 " :h が画面分割でヘルプを開くのに対して, :H で別タブでヘルプを開く
 " ただし.vimrc編集中は縦分割で開く
 
+" エンコード指定で開き直す
+command! -nargs=1 -complete=customlist,<SID>myencoding
+      \ Enc call <SID>reencode(<f-args>)
+function! s:reencode(enc)
+  execute 'edit ++enc='.a:enc
+endfunction
+function! s:myencoding(A,L,P)
+  return filter(split(&fileencodings,','),'v:val =~? "'.a:A.'"' )
+endfunction
+
 " 誤使用防止
 nnoremap q <Nop>
 nnoremap Q q
@@ -341,6 +362,7 @@ nnoremap Q q
 noremap ,v :<C-u>tabedit $HOME/.vimrc<CR>
 noremap ,g :<C-u>tabedit $HOME/.gitconfig<CR>
 noremap ,s :<C-u>NeoSnippetEdit -split<CR>
+noremap ,z :<C-u>tabedit $HOME/.zshrc<CR>
 
 " 編集後に設定を反映 (nestedはlightlineのために必要)
 autocmd vimrc BufWritePost *vimrc  nested source $MYVIMRC
@@ -369,16 +391,28 @@ nnoremap <silent> [unite]g :<C-u>Unite -silent -no-start-insert -vertical -winwi
 nnoremap <silent> [unite]G :<C-u>call <SID>my_unite_giti()<CR>
 nnoremap <silent> [unite]z :<C-u>Unite -silent -no-start-insert -vertical -winwidth=40 fold <CR>
 nnoremap <silent> [unite]o :<C-u>Unite -silent -no-start-insert -vertical -winwidth=40 outline mark <CR>
-nnoremap <silent> [unite]C :<C-u>Unite -auto-preview -vertical -winwidth=40 colorscheme <CR>
+nnoremap <silent><expr> [unite]C <SID>WanderUniteColorScheme()
 nnoremap <silent> [unite]F :<C-u>Unite -auto-preview -vertical -winwidth=40 font <CR>
+
+" カラースキーム一覧のランダムな位置に移動
+function! s:WanderUniteColorScheme()
+  " 乱数生成
+  let max_num   = 735
+  let match_end = matchend(reltimestr(reltime()), '\d\+\.') + 1
+  let rand      = reltimestr(reltime())[match_end : ] % (max_num + 1)
+  " Gを挟んで一度最後まで描画させる
+  return ":\<C-u>Unite -auto-preview -no-start-insert 
+        \ -vertical -winwidth=40  colorscheme\<CR>
+        \G:".rand."\<CR>"
+endfunction
 
 cabbrev U Unite
 " unite系変数の初期化
 if !exists("g:unite_source_alias_aliases")
-    let g:unite_source_alias_aliases = {}
+  let g:unite_source_alias_aliases = {}
 endif
 if !exists("g:unite_source_menu_menus")
-    let g:unite_source_menu_menus = {}
+  let g:unite_source_menu_menus = {}
 endif
 
 autocmd vimrc FileType unite call s:my_unite_setting()
@@ -531,6 +565,17 @@ let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase  = 1
 nmap <C-g> <Plug>(easymotion-overwin-f2)
 
+" switch
+let g:switch_mapping = ""
+let g:switch_custom_definitions =
+      \[
+      \ { '\v^( *- *)([^ \[].*)$'  : '\1[ ] \2' },
+      \ { '\v^( *- *)\[ \](.*)$'   : '\1[x]\2'  },
+      \ { '\v^( *- *)\[x\] ?(.*)$' : '\1\2'     },
+      \]
+" <C-t>の元の機能はタグジャンプ．もっとよいキーはないか
+nnoremap <C-t> :Switch<CR>
+
 " operator
 map _ <Plug>(operator-camelize-toggle)
 
@@ -564,7 +609,7 @@ vmap iv	<Plug>(textobj-wiw-i)
 vmap av	<Plug>(textobj-wiw-a)
 
 
-" git (fugitive, gitv, unite-giti, gista) {{{2
+" git (fugitive, gitv, unite-giti,gist) {{{2
 let g:unite_source_menu_menus.git = {"description" : "git command"}
 let g:unite_source_menu_menus.git.candidates = [
       \["add/rec", "Git add ." ],
@@ -599,6 +644,9 @@ function! s:my_unite_giti() "{{{
 endfunction "}}}
 command! Ginit lcd %:h |
       \!git status 1>/dev/null 2>/dev/null || git init
+
+" golang
+exe "set rtp+=".globpath($GOPATH,"src/github.com/nsf/gocode/vim")
 
 " latex (vimtex / unite-bibtex) {{{2
 let g:tex_conceal=''
@@ -648,20 +696,20 @@ let g:unite_source_alias_aliases.memolist = {
 " unite source memolist/new
 let s:memo_new = { "name":"memolist/new", "description":"memolist new" }
 function! s:memo_new.gather_candidates(args,context)
-    return [{
-      \"word" : "[ new memo ]", "kind" : "command",
-      \"action__command" : "MemoNew"
-      \	}]
+  return [{
+        \"word" : "[ new memo ]", "kind" : "command",
+        \"action__command" : "MemoNew"
+        \	}]
 endfunction
 call unite#define_source(s:memo_new)
 unlet s:memo_new
 " unite source memolist/new
 let s:memo_grep = { "name":"memolist/grep", "description":"memolist grep" }
 function! s:memo_grep.gather_candidates(args,context)
-    return [{
-      \"word" : "[ grep memo ]", "kind" : "command",
-      \"action__command" : "MemoGrep"
-      \	}]
+  return [{
+        \"word" : "[ grep memo ]", "kind" : "command",
+        \"action__command" : "MemoGrep"
+        \	}]
 endfunction
 call unite#define_source(s:memo_grep)
 unlet s:memo_grep
@@ -670,7 +718,6 @@ unlet s:memo_grep
 augroup vimrc_igor
   autocmd!
   autocmd BufNewFile,BufRead *.ipf set filetype=igorpro
-  autocmd filetype igorpro  set  fileencoding=shift_jis
   autocmd filetype igorpro  setl noexpandtab
   autocmd filetype igorpro  setl foldmethod=marker
   autocmd filetype igorpro  setl commentstring=//%s
@@ -719,5 +766,61 @@ call unite#define_source(s:unite_source)
 unlet s:unite_source
 "}}}
 
+" Weekly Note {{{
+nnoremap <silent> [unite]w :<C-u>Unite
+      \ -silent -no-start-insert -auto-preview
+      \ weekly/current weekly/next weekly<CR>
+
+let g:weekly_note_dir = '~/weekly'
+command! WeeklyNote call s:weekly()
+command! WeeklyNoteNext execute "edit ".s:weekly_next()
+command! WeeklyNoteCurrent execute "edit ".s:weekly_current()
+function! s:weekly()
+  if(expand("%:p") ==# s:weekly_current())
+    execute "split ".s:weekly_next()
+  else
+    execute "edit ".s:weekly_current()
+  endif
+endfunction
+function! s:weekly_current()
+  return expand(s:weekly_dir().(strftime('%W')+0).'th.md',':p') 
+endfunction
+function! s:weekly_next()
+  return expand(s:weekly_dir().(strftime('%W')+1).'th.md',':p') 
+endfunction
+function! s:weekly_dir()
+  if !isdirectory(g:weekly_note_dir)
+    call mkdir(g:weekly_note_dir,'p')
+  endif
+  let dir=expand(g:weekly_note_dir . strftime('/%Y'),':p')
+  if !isdirectory(dir)
+    call mkdir(dir)
+  endif
+  return dir.'/'
+endfunction
+
+let g:unite_source_alias_aliases.weekly = {
+      \"source" : "file", "description" : "weekly note",
+      \"args"   : escape(substitute(g:weekly_note_dir.strftime('/%Y'), '\\', '/', 'g'), ' ')
+      \}
+let s:weekly_next = { "name":"weekly/next", "description":"next weekly note" }
+function! s:weekly_next.gather_candidates(args,context)
+  return [{
+        \"word" : "[ next weekly note ]", "kind" : "command",
+        \"action__command" : "WeeklyNoteNext"
+        \	}]
+endfunction
+call unite#define_source(s:weekly_next)
+unlet s:weekly_next
+let s:weekly_current = { "name":"weekly/current", "description":"current weekly note" }
+function! s:weekly_current.gather_candidates(args,context)
+  return [{
+        \"word" : "[ current weekly note ]", "kind" : "command",
+        \"action__command" : "WeeklyNoteCurrent"
+        \	}]
+endfunction
+call unite#define_source(s:weekly_current)
+unlet s:weekly_current
+"}}}
 
 " vim: foldmethod=marker
