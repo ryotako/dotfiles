@@ -1,5 +1,8 @@
 # Path
 export PATH="$PATH:$HOME/bin"
+# Golang
+export GOPATH=$HOME/dev
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 # for quantum calculation
 # export PATH="$PATH:$HOME/sw/bin"
 # export PATH="$PATH:$HOME/Documents/First-Principles/espresso-5.2.0/bin"

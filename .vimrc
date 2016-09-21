@@ -1,4 +1,4 @@
-" start up {{{1
+" Start Up {{{1
 " for Japanese comments
 set encoding=utf-8
 scriptencoding utf-8
@@ -8,13 +8,13 @@ augroup vimrc
 augroup END
 " 古いvimではvimrcを読まない
 if v:version < 700
-  echoerr 'This _vimrc requires Vim 7 or later.'
+  echoerr 'This .vimrc requires Vim 7 or later.'
   quit
 endif
-set guioptions+=M " メニューを表示しない. syntax on, filetype onより前に書く
 " }}}1
 
 " NeoBundle {{{1
+
 " neobundle begin{{{2
 if has('vim_starting')
   if &compatible
@@ -27,12 +27,12 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Shougo-ware {{{2
 NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'Shougo/vimshell.vim'
 
 " unite source {{{2
 NeoBundle 'Shougo/neomru.vim'
@@ -40,31 +40,31 @@ NeoBundle 'Shougo/neoyank.vim'
 NeoBundle 'Shougo/unite-help'
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'haya14busa/unite-reading-vimrc'
+NeoBundle 'lambdalisue/unite-linephrase'
 NeoBundle 'osyo-manga/unite-fold'
-NeoBundle 'osyo-manga/unite-qfixhowm'
 NeoBundle 'osyo-manga/unite-highlight'
+NeoBundle 'osyo-manga/unite-qfixhowm'
 NeoBundle 'rhysd/unite-codic.vim'
+NeoBundle 'sorah/unite-ghq'
 NeoBundle 'tacroe/unite-mark'
 NeoBundle 'thinca/vim-unite-history'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'ujihisa/unite-font'
-NeoBundle 'lambdalisue/unite-linephrase'
-NeoBundle 'sorah/unite-ghq'
 
-" neocomplete source
-NeoBundle 'Shougo/neco-vim'
+" neocomplete source {{{2
 NeoBundle 'Shougo/neco-syntax'
+NeoBundle 'Shougo/neco-vim'
 NeoBundle 'ujihisa/neco-look'
 
 " extend basic vim commands {{{2
 NeoBundle 'Konfekt/FastFold'          " neocompleteしながら折畳みするために
 NeoBundle 'LeafCage/foldCC.vim'       " 見やすい折りたたみ表示
 NeoBundle 'LeafCage/yankround.vim'    " ヤンク履歴を管理
-NeoBundle 'easymotion/vim-easymotion' " 4ストローク以内で移動
+NeoBundle 'easymotion/vim-easymotion' " 見えている場所に素早く移動
 NeoBundle 'haya14busa/incsearch.vim'  " 検索中に対象をハイライト
 NeoBundle 'itchyny/lightline.vim'     " ステータスライン拡張
 NeoBundle 'kana/vim-niceblock'        " ビジュアルモードのI,Aの挙動を矩形選択に
-NeoBundle 'kana/vim-submode'          " 連打を便利に
+NeoBundle 'kana/vim-submode'          " 連打で便利に
 NeoBundle 'osyo-manga/vim-anzu'       " 検索の一致件数を取得
 NeoBundle 'osyo-manga/vim-brightest'  " カーソル下と同じ単語をハイライト
 NeoBundle 'osyo-manga/vim-over'       " 置換対象をハイライト
@@ -78,7 +78,6 @@ NeoBundle 'vim-jp/vimdoc-ja'          " 日本語ヘルプ
 " operator {{{2
 NeoBundle 'kana/vim-operator-user'         " operator自作のための機構
 NeoBundle 'thinca/vim-operator-sequence'   " 複数operatorの統合
-
 NeoBundle 'haya14busa/vim-operator-flashy' " y: ヤンクを可視化
 NeoBundle 'kana/vim-operator-replace'      " S: レジスタから貼付け
 NeoBundle 'tyru/operator-camelize.vim'     " _: キャメル・スネークケース入替え
@@ -87,8 +86,7 @@ NeoBundle 'tyru/operator-camelize.vim'     " _: キャメル・スネークケ�
 " builtin w, W, s, p, [, ], (,), <, >, {, }, ", ', `
 " replace q('), d(")
 " vimtex  e, d, c, $, m(math, m=$)
-NeoBundle 'kana/vim-textobj-user'             " textob自作のための機構
-
+NeoBundle 'kana/vim-textobj-user'             " textobj自作のための機構
 NeoBundle 'kana/vim-textobj-entire'           " a: 全て (all, e -> environment)
 NeoBundle 'osyo-manga/vim-textobj-multiblock' " b: 囲まれた範囲
 NeoBundle 'kana/vim-textobj-fold'             " z: 折畳みの範囲
@@ -99,31 +97,27 @@ NeoBundle 'mattn/vim-textobj-url'             " u: URL
 NeoBundle 'thinca/vim-textobj-comment'        " /: コメント
 
 " scripting {{{2
-NeoBundle 'cohama/lexima.vim'         " 対括弧補完
+NeoBundle 'cohama/lexima.vim'         " 対括弧補完．古いvimだとIMEに干渉する？
 NeoBundle 'LeafCage/vimhelpgenerator' " vimプラグインヘルプ生成
-NeoBundle 'junegunn/vim-easy-align'   " 位置揃え
+NeoBundle 'junegunn/vim-easy-align'   " 簡単位置揃え
 NeoBundle 'koron/codic-vim'           " プログラマ向け辞書
-NeoBundle 'tpope/vim-commentary'      " quasi-operator gc: comment/uncomment line
-NeoBundle 'tpope/vim-surround'        " quasi-textobj  s:  change/delete surroundings
+NeoBundle 'tpope/vim-commentary'      " 疑似operator gc: comment/uncomment line
+NeoBundle 'tpope/vim-surround'        " 疑似textobj s: change/delete surrounding
+NeoBundle 'thinca/vim-prettyprint'    " vimの変数のprettyprint
+NeoBundle 'tyru/capture.vim'          " unite outputと異なり素のバッファに出力
+NeoBundle 'AndrewRadev/switch.vim'    " 指定した切り替える
 
-NeoBundle 'thinca/vim-prettyprint'
-NeoBundle 'tyru/capture.vim'
-
-" external tools {{{2
-" git
+" git {{{2
 NeoBundle 'tpope/vim-fugitive' " vimからgit
 NeoBundle 'cohama/agit.vim'    " commit履歴を可視化
 NeoBundle 'mattn/gist-vim'     " gistにアクセス
 NeoBundle 'mattn/webapi-vim'   " gist-vimのために必要
 
-
-" language support {{{2
-" markdown
-NeoBundle 'plasticboy/vim-markdown'
-" go
+" language supports {{{2
 NeoBundle 'fatih/vim-go'
-" tex
 NeoBundle 'lervag/vimtex'
+NeoBundle 'mhaig/vim-blockdiag-series'
+NeoBundle 'plasticboy/vim-markdown'
 " NeoBundle 'termoshtt/unite-bibtex'
 
 " memo {{{2
@@ -132,16 +126,12 @@ NeoBundle 'fuenor/qfixhowm'
 NeoBundle 'glidenote/memolist.vim'
 
 " colorscheme {{{2
+let g:i_am_not_pika_beast = 1          " すぐにはコロコロしない
+NeoBundle 'anekos/colocolo.vim'        " 色がコロコロ変わる
 NeoBundle 'cocopon/iceberg.vim'        " 黒地青基調．
+NeoBundle 'flazz/vim-colorschemes'     " カラースキームカタログ
 NeoBundle 'popkirby/lightline-iceberg' " lightlineのiceberg
-" NeoBundle 'itchyny/landscape.vim'      " qf, quickrun, unite, vimfiler, vimshellの色設定
-NeoBundle 'flazz/vim-colorschemes'
-
-" others {{{2
-NeoBundle 'leseixas/quantum_espresso-vim'
-NeoBundle 'benjifisher/Vim-Plugin-for-Drupal'
-NeoBundle 'mhaig/vim-blockdiag-series'
-NeoBundle 'AndrewRadev/switch.vim'
+NeoBundle 'rhysd/try-colorscheme.vim'  " インストールせずに試す
 
 " my plugins
 NeoBundle 'ryotako/unite-latex-package',
@@ -159,13 +149,13 @@ NeoBundleCheck
 " Basic {{{1
 
 " 文字コード・日本語入力等
-set encoding=utf-8
 set fileencodings=cp932,sjis,euc-jp,utf-8
 set fileformat=unix   " 改行コードを<LF>に
 set spelllang=en,cjk  " アジア圏言語をスペルミス判定しない
 set formatoptions=q   " 勝手に改行させない
 set ambiwidth=double  " 文字幅が判別できない時は全角扱い
 set display+=lastline " 長い行を省略しない
+set helplang=ja,en    " ヘルプは日本語を優先
 
 " 自動生成されるファイルの設定
 set swapfile     " swpファイル(未保存の変更内容)の作成の有無
@@ -188,18 +178,21 @@ set foldlevel=99      " 勝手に閉じない
 set foldlevelstart=99 " 編集開始時には全て開く
 set laststatus=2      " 常にステータス行を表示
 set lazyredraw        " 直接実行したコマンドでない場合再描画しない
-set matchtime=1       " 対応括弧表示時間(サブ秒)
+set matchtime=1       " 対応括弧表示時間(サブ秒)   
 set nolist            " 不可視文字は不可視
 set number            " 行番号を表示
 set showmatch         " 対応括弧表示
 set showtabline=2     " 常にタブ行を表示
 set splitbelow        " ウィンドウは下に分割
 set splitright        " ウィンドウは右に分割
+set textwidth=80      " この文字数以降は折り返す
 set wildmenu          " ステータスラインに補完候補を並べる
 set wrap              " 長い行の折り返し
-set colorcolumn=+1
-set textwidth=80
-set listchars=tab:>-,trail:-
+
+" conceal無効．
+autocmd vimrc BufNewFile,BufRead * set conceallevel=0
+" textwidthより右を塗りつぶす
+execute "set colorcolumn=".join(range(&textwidth+1, 999), ',')
 
 " インデントの設定
 set expandtab         " タブを入力時に空白に展開
@@ -209,7 +202,7 @@ set softtabstop=2     " 連続した空白をカーソルで移動する際の�
 set autoindent        " 改行時にインデントを継続
 set smartindent       " 入力内容に合わせたインデントの増減
 set breakindent       " wrapした文章もインデントして表示
-set formatoptions-=ro " 改行時にコメントアウトしない設定 oによる挿入は別
+set formatoptions-=ro " 改行時に自動コメントアウトしない
 
 " カーソル移動等
 set backspace=indent,eol,start " 行をまたぐバックスペースを有効化
@@ -225,10 +218,14 @@ set incsearch  " 検索文字列が入力途中の段階から検索
 set hlsearch   " 検索文字列のハイライト
 
 " カラースキーム & lightline
-let s:cui_colorscheme = 'stonewashed-256'
-let s:gui_colorscheme = 'stonewashed-gui'
-let s:lightline_color = 'solarized'
+" let s:cui_colorscheme = 'stonewashed-256'
+" let s:gui_colorscheme = 'stonewashed-gui'
+" let s:lightline_color = 'solarized'
+let s:cui_colorscheme = 'iceberg'
+let s:gui_colorscheme = 'iceberg'
+let s:lightline_color = 'iceberg'
 
+" 上で色設定しておくと，後はよしなにする
 let s:scheme = has('gui_running') && len(s:gui_colorscheme) 
       \ ? s:gui_colorscheme : s:cui_colorscheme
 execute 'colorscheme '.s:scheme
@@ -236,61 +233,81 @@ execute 'autocmd vimrc GUIEnter * nested set t_Co=256 | colorscheme '.s:scheme
 let g:lightline = {'colorscheme' : s:lightline_color}
 let g:lightline.component = {'lineinfo': '%3l[%L]:%-2v'}
 
+" カラースキームをランダムに変更
+command! -nargs=0 Colo highlight clear | ColoColo | redraw | colorscheme
+
 " その他
 set modeline          " コメントでvimに指示を出す
 set notimeout         " タイムアウトを無効
 set hidden            " quit時にバッファを削除せず，隠す
-" set confirm           " 変更されたバッファがあるとき，確認
+set confirm           " 変更されたバッファがあるとき，確認
 set switchbuf=useopen " すでに開いているバッファがあれば，それを開く
 set keywordprg=:help  " K は:! manではなく:help
 " }}}
 
-" Key Mapping {{{
+" Key Mapping {{{1
+" Insert Mode {{{2
+
+" undo履歴を分断しない前後移動 Backward, Forward
+inoremap <C-b> <C-g>U<Left>
+inoremap <C-f> <C-g>U<Right>
+" 行頭行末移動(undo履歴分断) A, End
+inoremap <C-a> <C-o>^
+inoremap <C-e> <C-o>$
+
+" Command Mode {{{2
+" emacs風(というか，シェル風)に入れ替え
+
+" 前後移動 Backward, Forward
+" <spacce><BS>は補完を抜ける儀式
+cnoremap <C-b> <space><BS><left>
+cnoremap <C-f> <space><BS><right>
+cnoremap <C-x> <C-f> 
+
+" 行頭行末移動 A, End
+" <C-e>はもともと行末移動
+cnoremap <C-a> <C-b>
+
+
+" Others {{{2
 " ホームポジションからコマンド開始
 noremap : ;
 noremap ; :
 
+" 直前のexコマンドを繰り返す (Hack97)
+nnoremap <C-H> q:k<CR>
+
+" tab移動
+nnoremap <C-J> gt
+nnoremap <C-K> gT
+
 " D,Cとの整合性
 nnoremap Y y$
 
-" <C-s>で保存, <C-q>で閉じる
-noremap  <C-s> :<C-u>w<CR>
-inoremap <C-s> <ESC>:<C-u>w<CR>a
-noremap  <C-q> :<C-u>quit<CR>
-command! Q :q!
+" 行頭行末移動
+noremap H ^
+noremap L $
 
 " エスケープ系
-" jj, <C-j>の両方を<ESC>の代用に設定．<ESC>連打でnohlsearch
-noremap  <C-j> <ESC>
-inoremap <C-j> <ESC>
-inoremap jj    <ESC>
+" <C-[>に慣れるキャンペーン実施中
 nnoremap <ESC><ESC> :nohlsearch<CR>
-nnoremap <C-j><C-j> :nohlsearch<CR>
+
+" jj, <C-j>の両方を<ESC>の代用に設定．<ESC>連打でnohlsearch
+" noremap  <C-j> <ESC>
+" inoremap <C-j> <ESC>
+" inoremap jj    <ESC>
+" nnoremap <C-j><C-j> :nohlsearch<CR>
 
 " 表示行で移動
 noremap  j      gj
 noremap  k      gk
 noremap  <DOWN> gj
 noremap  <UP>   gk
-inoremap <DOWN> <ESC>gja
-inoremap <UP>   <ESC>gka
 
 " インデント変更の連続実行
 " ドットリピートでもできるが，これは選択された状態が持続する
 vnoremap < <gv
 vnoremap > >gv
-
-
-" 行挿入
-" nnoremap o o <C-u>
-" nnoremap O O <C-u>
-
-
-
-
-" Ctrlとの同時押しでノーマルモードで改行・削除
-noremap  <C-CR> i<CR><ESC>
-noremap  <C-BS> i<BS><ESC>
 
 " 設定のトグル
 nnoremap t <Nop>
@@ -307,7 +324,7 @@ nnoremap tb :<C-u>BrightestToggle<CR>
 " keyを指定すると最初の呼び出しで変更を行わず，key連打で変更を繰り返す．
 function! s:ToggleOption(option,key,list) "{{{
   if strlen(a:key)
-    execute 'setl '.a:option.'?'
+    execute 'setlocal '.a:option.'?'
     let input=nr2char(getchar())
   endif
   while strlen(a:key) == 0 || input ==# a:key
@@ -337,12 +354,12 @@ noremap tY :%s/\\/¥/ge<CR><C-o>
 noremap t$ :%s/\v +$//ge<CR>:nohlsearch<CR><C-o>
 
 " ヘルプ
-command! -nargs=1 -complete=help H call <SID>my_help(<f-args>)
-function! s:my_help(str)
-  exe (expand('%') =~# '.vimrc' ? 'vert' : 'tab') . ' help '.a:str
-endfunction
 " :h が画面分割でヘルプを開くのに対して, :H で別タブでヘルプを開く
 " ただし.vimrc編集中は縦分割で開く
+command! -nargs=1 -complete=help H call <SID>my_help(<f-args>)
+function! s:my_help(str)
+  execute (expand('%') =~# '.vimrc' ? 'vert' : 'tab') . ' help '.a:str
+endfunction
 
 " エンコード指定で開き直す
 command! -nargs=1 -complete=customlist,<SID>myencoding
@@ -394,19 +411,8 @@ nnoremap <silent> [unite]o :<C-u>Unite -silent -no-start-insert -vertical -winwi
 nnoremap <silent><expr> [unite]C <SID>WanderUniteColorScheme()
 nnoremap <silent> [unite]F :<C-u>Unite -auto-preview -vertical -winwidth=40 font <CR>
 
-" カラースキーム一覧のランダムな位置に移動
-function! s:WanderUniteColorScheme()
-  " 乱数生成
-  let max_num   = 735
-  let match_end = matchend(reltimestr(reltime()), '\d\+\.') + 1
-  let rand      = reltimestr(reltime())[match_end : ] % (max_num + 1)
-  " Gを挟んで一度最後まで描画させる
-  return ":\<C-u>Unite -auto-preview -no-start-insert 
-        \ -vertical -winwidth=40  colorscheme\<CR>
-        \G:".rand."\<CR>"
-endfunction
-
 cabbrev U Unite
+
 " unite系変数の初期化
 if !exists("g:unite_source_alias_aliases")
   let g:unite_source_alias_aliases = {}
@@ -414,11 +420,6 @@ endif
 if !exists("g:unite_source_menu_menus")
   let g:unite_source_menu_menus = {}
 endif
-
-autocmd vimrc FileType unite call s:my_unite_setting()
-function! s:my_unite_setting() "{{{
-  call unite#custom#profile('default','context',{'prompt':'>'})
-endfunction "}}}
 
 " complete (neocomplete / neosnippet) {{{2
 let g:neocomplete#enable_at_startup = 1
@@ -444,9 +445,6 @@ nnoremap <Space>: :<C-u>VimShellBufferDir<CR>
 let g:vimfiler_as_default_explorer  = 1
 let g:vimfiler_safe_mode_by_default = 0
 let g:vimshell_vimshrc_path = expand('~/.vimshrc')
-" let g:vimshell_prompt_expr = 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
-" let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
-" prompt from haya14busa's vimrc
 let g:vimshell_prompt = "% "
 let g:vimshell_secondary_prompt = "> "
 let g:vimshell_user_prompt = 'getcwd()'
@@ -489,10 +487,6 @@ xnoremap gs :OverCommandLine<CR>s/
 let g:brightest_enable = 0
 
 " window (s-mapping, submode) {{{2
-" nnoremap <Up>    <C-w>-
-" nnoremap <Down>  <C-w>+
-" nnoremap <Right> <C-w>>
-" nnoremap <Left>  <C-w><
 nnoremap s  <C-w>
 nnoremap se <C-w>=
 nnoremap ss <C-w>s
@@ -502,30 +496,19 @@ nnoremap st :<C-u>tabnew<CR>
 nnoremap tt :<C-u>tabnew<CR>
 let g:submode_keep_leaving_key    = 1
 let g:submode_always_show_submode = 1
-call submode#enter_with('winmove', 'n', '', 'sw', '<C-w>w')
-call submode#enter_with('winmove', 'n', '', 'sW', '<C-w>W')
-call submode#map       ('winmove', 'n', '', 'w',  '<C-w>w')
-call submode#map       ('winmove', 'n', '', 'W',  '<C-w>W')
-call submode#enter_with('winseze', 'n', '', 's>', '<c-w>>')
-call submode#enter_with('winseze', 'n', '', 's<', '<c-w><')
-call submode#enter_with('winseze', 'n', '', 's-', '<c-w>-')
-call submode#enter_with('winseze', 'n', '', 's+', '<c-w>+')
-call submode#map       ('winseze', 'n', '', '>',  '<c-w>>')
-call submode#map       ('winseze', 'n', '', '<',  '<c-w><')
-call submode#map       ('winseze', 'n', '', '-',  '<c-w>-')
-call submode#map       ('winseze', 'n', '', '+',  '<c-w>+')
 call submode#enter_with('tabmove', 'n', '', 'gt', 'gt')
 call submode#enter_with('tabmove', 'n', '', 'gT', 'gT')
 call submode#map       ('tabmove', 'n', '', 't',  'gt')
 call submode#map       ('tabmove', 'n', '', 'T',  'gT')
 
 " yank (flashy / yankround / replace) {{{2
-
 " flashyにtextobj-user製のtextobjを渡すための小細工
-let g:operator#flashy#group = 'Visual'
+" let g:operator#flashy#group = 'Visual' " 背景色によっては変更が必要
 let g:operator#flashy#flash_time = 200
-nnoremap <silent> <plug>(sleep) :<C-u>sleep 200m<CR>
-nnoremap <expr> y operator#sequence#map("\<Plug>(operator-flashy)","\<plug>(sleep)")
+nnoremap <expr><silent> <plug>(sleep)
+      \ ":<C-u>sleep ".g:operator#flashy#flash_time."m<CR>"
+nnoremap <expr> y operator#sequence#map
+      \("\<Plug>(operator-flashy)","\<plug>(sleep)")
 nmap Y  <plug>(operator-flashy)$
 nmap yy <plug>(operator-flashy)<Plug>(operator-flashy)
 
@@ -533,10 +516,18 @@ nmap yy <plug>(operator-flashy)<Plug>(operator-flashy)
 let g:yankround_use_region_hl = 1
 let g:yankround_max_history   = 100
 let g:yankround_region_hl_groupname = g:operator#flashy#group
-nmap <expr> p  yankround#is_active() ? "\<Plug>(yankround-prev)" : "\<Plug>(yankround-p)"
-nmap <expr> P  yankround#is_active() ? "\<Plug>(yankround-next)" : "\<Plug>(yankround-P)"
-nmap <expr> gp yankround#is_active() ? "\<Plug>(yankround-prev)" : "\<Plug>(yankround-gp)"
-nmap <expr> gP yankround#is_active() ? "\<Plug>(yankround-next)" : "\<Plug>(yankround-gP)"
+nmap <expr> p  yankround#is_active() ? 
+      \ "\<Plug>(yankround-prev)" : "\<Plug>(yankround-p)"
+nmap <expr> P  yankround#is_active() ?
+      \ "\<Plug>(yankround-next)" : "\<Plug>(yankround-P)"
+nmap <expr> gp yankround#is_active() ? 
+      \ "\<Plug>(yankround-prev)" : "\<Plug>(yankround-gp)"
+nmap <expr> gP yankround#is_active() ?
+      \ "\<Plug>(yankround-next)" : "\<Plug>(yankround-gP)"
+
+" xでレジスタを汚さない＆x連打はまとめてundo履歴に登録
+call submode#enter_with('x', 'n', '', 'x', '"_x')
+call submode#map('x', 'n', '', 'x', ":\<C-u>undojoin <bar> normal! \"_x<CR>")
 
 " Sはccと機能が重複するので潰す
 nmap S <Plug>(operator-replace)
@@ -551,21 +542,22 @@ noremap <expr><Plug>(region_reselect) mode() == 'n' ? '' : "\<ESC>gv"
 let g:expand_region_text_objects = {'i]':1,'ib':1,'iB':1,'il':1,'ip':1,'ie':1,}
 
 " undo (gundo) {{{2
-let g:gundo_right = 1
-let g:gundo_help = 1
-let g:gundo_close_on_revert = 1
-let g:gundo_preview_height = 10
-nnoremap <silent> U :<C-u>GundoToggle<CR>
+" let g:gundo_right = 1
+" let g:gundo_help = 1
+" let g:gundo_close_on_revert = 1
+" let g:gundo_preview_height = 10
+" nnoremap <silent> U :<C-u>GundoToggle<CR>
 
 " fold (foldCC) {{{2
 set foldtext=FoldCCtext()
 
 " motion (easymotion) {{{2
 let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_smartcase  = 1
+let g:EasyMotion_smartcase = 1
 nmap <C-g> <Plug>(easymotion-overwin-f2)
 
 " switch
+" markdownのチェックボックスを入れ替える
 let g:switch_mapping = ""
 let g:switch_custom_definitions =
       \[
@@ -573,13 +565,13 @@ let g:switch_custom_definitions =
       \ { '\v^( *- *)\[ \](.*)$'   : '\1[x]\2'  },
       \ { '\v^( *- *)\[x\] ?(.*)$' : '\1\2'     },
       \]
-" <C-t>の元の機能はタグジャンプ．もっとよいキーはないか
+" <C-t>の元の機能はタグジャンプ．もっとよい割り当て先はないか
 nnoremap <C-t> :Switch<CR>
 
 " operator
 map _ <Plug>(operator-camelize-toggle)
 
-" text object (multiblock / wiw / space / cline) {{{2
+" text object (multiblock / comment / entire/ wiw) {{{2
 omap aq a'
 omap iq i'
 vmap aq a'
@@ -607,7 +599,6 @@ omap iv	<Plug>(textobj-wiw-i)
 omap av	<Plug>(textobj-wiw-a)
 vmap iv	<Plug>(textobj-wiw-i)
 vmap av	<Plug>(textobj-wiw-a)
-
 
 " git (fugitive, gitv, unite-giti,gist) {{{2
 let g:unite_source_menu_menus.git = {"description" : "git command"}
@@ -646,7 +637,7 @@ command! Ginit lcd %:h |
       \!git status 1>/dev/null 2>/dev/null || git init
 
 " golang
-exe "set rtp+=".globpath($GOPATH,"src/github.com/nsf/gocode/vim")
+execute "set rtp+=".globpath($GOPATH,"src/github.com/nsf/gocode/vim")
 
 " latex (vimtex / unite-bibtex) {{{2
 let g:tex_conceal=''
@@ -714,28 +705,21 @@ endfunction
 call unite#define_source(s:memo_grep)
 unlet s:memo_grep
 
-" Igor {{{2
+" Igor Pro {{{2
 augroup vimrc_igor
   autocmd!
   autocmd BufNewFile,BufRead *.ipf set filetype=igorpro
-  autocmd filetype igorpro  setl noexpandtab
-  autocmd filetype igorpro  setl foldmethod=marker
-  autocmd filetype igorpro  setl commentstring=//%s
-  autocmd filetype igorpro  inoremap <buffer> \ ¥
-  autocmd filetype igorpro  command! Yen %s/\\/¥/g
+  autocmd filetype igorpro  setlocal noexpandtab
+  autocmd filetype igorpro  setlocal foldmethod=marker
+  autocmd filetype igorpro  setlocal commentstring=//%s
 augroup END
-
-command! Igor :Unite file_rec
-      \ -auto-preview -vertical-preview -create
-      \ -input=.ipf
-      \ -path=$HOME/OneDrive/Igor\ Pro\ User\ Files/User\ Procedures
-" }}}2
 
 " blockdiag {{{2
 augroup vimrc_blockdiag
   autocmd!
   autocmd BufNewFile,BufRead *.diag set filetype=blockdiag
 augroup END
+
 " linewise increment {{{2
 map ga <Plug>(incline-inc)
 map gx <Plug>(incline-dec)
@@ -744,18 +728,21 @@ vmap <expr> <C-x>  mode() ==# "V" ? "\<Plug>(incline-dec)"          : "\<C-x>"
 vmap <expr> g<C-a> mode() ==# "V" ? "\<Plug>(incline-inc-inclined)" : "g\<C-a>"
 vmap <expr> g<C-x> mode() ==# "V" ? "\<Plug>(incline-dec-inclined)" : "g\<C-x>"
 
-" experimental setting {{{1
+" Experimental {{{2
+" 句読点 -> カンマピリオド変換
 command! ConvertToComma  :%s/、/，/ge
 command! ConvertToPeriod :%s/。/．/ge
 
 " my unite source: beamer theme  {{{
-let s:beamer_themes_path="/usr/local/texlive/2016/texmf-dist/tex/latex/beamer/themes/theme"
+let s:beamer_themes_path=
+      \"/usr/local/texlive/2016/texmf-dist/tex/latex/beamer/themes/theme"
 let s:unite_source = {
       \ 'name': 'beamer_theme',
       \ 'description': 'built-in LaTeX beamer themes',
       \}
 function! s:unite_source.gather_candidates(args, context)
-  let s:files = filter(split(system('ls '.s:beamer_themes_path)),'v:val =~# "^beamertheme\.\*\\.sty$"')
+  let s:files = filter(split(system('ls '.s:beamer_themes_path)),
+        \'v:val =~# "^beamertheme\.\*\\.sty$"')
   return map(s:files,'{
         \ "word": substitute(v:val[11:],"\.sty$","",""),
         \ "source": "beamer_theme",
@@ -773,24 +760,22 @@ nnoremap <silent> [unite]w :<C-u>Unite
 
 let g:weekly_note_dir = '~/weekly'
 command! WeeklyNote call s:weekly()
-command! WeeklyNoteNext execute "edit ".s:weekly_next()
-command! WeeklyNoteCurrent execute "edit ".s:weekly_current()
+command! WeeklyNotePrev execute "edit ".s:weekly_note(-1)
+command! WeeklyNoteCurr execute "edit ".s:weekly_note( 0)
+command! WeeklyNoteNext execute "edit ".s:weekly_note( 1)
 function! s:weekly()
-  if(expand("%:p") ==# s:weekly_current())
-    execute "split ".s:weekly_next()
+  if(expand("%:p") ==# s:weekly_note(0))
+    execute "split ".s:weekly_note(-1)
   else
-    execute "edit ".s:weekly_current()
+    execute "edit ".s:weekly_note(0)
   endif
 endfunction
-function! s:weekly_current()
-  return expand(s:weekly_dir().(strftime('%W')+0).'th.md',':p') 
-endfunction
-function! s:weekly_next()
-  return expand(s:weekly_dir().(strftime('%W')+1).'th.md',':p') 
+function! s:weekly_note(num)
+  return expand(s:weekly_dir(),':p').(strftime('%W')+a:num).'th.md'
 endfunction
 function! s:weekly_dir()
-  if !isdirectory(g:weekly_note_dir)
-    call mkdir(g:weekly_note_dir,'p')
+  if !isdirectory(expand(g:weekly_note_dir,':p'))
+    call mkdir(expand(g:weekly_note_dir,':p'),'p')
   endif
   let dir=expand(g:weekly_note_dir . strftime('/%Y'),':p')
   if !isdirectory(dir)
@@ -800,27 +785,7 @@ function! s:weekly_dir()
 endfunction
 
 let g:unite_source_alias_aliases.weekly = {
-      \"source" : "file", "description" : "weekly note",
-      \"args"   : escape(substitute(g:weekly_note_dir.strftime('/%Y'), '\\', '/', 'g'), ' ')
-      \}
-let s:weekly_next = { "name":"weekly/next", "description":"next weekly note" }
-function! s:weekly_next.gather_candidates(args,context)
-  return [{
-        \"word" : "[ next weekly note ]", "kind" : "command",
-        \"action__command" : "WeeklyNoteNext"
-        \	}]
-endfunction
-call unite#define_source(s:weekly_next)
-unlet s:weekly_next
-let s:weekly_current = { "name":"weekly/current", "description":"current weekly note" }
-function! s:weekly_current.gather_candidates(args,context)
-  return [{
-        \"word" : "[ current weekly note ]", "kind" : "command",
-        \"action__command" : "WeeklyNoteCurrent"
-        \	}]
-endfunction
-call unite#define_source(s:weekly_current)
-unlet s:weekly_current
-"}}}
+      \"source" : "file_rec", "description" : "weekly note",
+      \"args"   : expand(g:weekly_note_dir,':p')}
 
 " vim: foldmethod=marker

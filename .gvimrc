@@ -1,7 +1,11 @@
 " Setting {{{
-" cd $HOME
 set cmdheight=1
-set guioptions-=mTlL
+set guioptions-=m
+set guioptions-=T
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
 set guicursor=a:blinkon0
 " inoremap \ \
 " ¥ マークと別に\があるキーボードのため．
@@ -10,9 +14,9 @@ set guicursor=a:blinkon0
 " Font {{{
 set antialias
 if has("win32") || has("win64")
-  set guifontwide=MeiryoKe_Console:h10
-  set guifont=MeiryoKe_Console:h10
-  set linespace=5
+  set guifontwide=MeiryoKe_Console:h9
+  set guifont=MeiryoKe_Console:h9
+  set linespace=4
 elseif has("mac")
   set guifontwide=ricty:h13
   set guifont=ricty:h13

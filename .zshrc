@@ -1,36 +1,44 @@
 # プラグイン {{{1
-## zsh-completions
-fpath=(/usr/local/share/zsh-completions $fpath)
-## z
-source $(brew --prefix)/etc/profile.d/z.sh
+fpath=(/usr/local/share/zsh-completions $fpath) # zsh-completions
+source $(brew --prefix)/etc/profile.d/z.sh      # z
 
 # 基本設定 {{{1
-# ヘルプ (homebrewでzshを入れた関係で必要)
+## ヘルプ (homebrewでzshを入れた関係で必要)
 unalias run-help && autoload run-help
 HELPDIR=/usr/local/share/zsh/help
 
-# エディタ，ページャ
+## エディタ，ページャ
 export EDITOR=vim PAGER=vimpager
 export LANG=ja_JP.UTF-8
 
-# プロンプト
+## プロンプト
 PROMPT='%K{blue}%F{black}%.%f%k '
 RPROMPT='[%w %t]'
-
-# 自動補完
-autoload -Uz compinit && compinit
-# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 大文字小文字無視
-
-## オプション
-setopt auto_cd auto_pushd pushd_ignore_dups
-setopt share_history hist_ignore_all_dups
-setopt no_beep
-setopt no_correct
 
 ## ヒストリ
 HISTFILE=~/.zsh_history
 HISTFIZE=1000000
 SAVEHIST=1000000
+
+## 自動補完
+autoload -Uz compinit && compinit
+zstyle ':completion:*:default' menu select=2 # 現在の選択肢を反転表示
+# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 大文字小文字無視
+
+## オプション
+setopt auto_cd auto_pushd pushd_ignore_dups # ディレクトリ変更
+setopt list_rows_first menu_complete        # 補完
+setopt equals                               # ファイル名展開とグロブ
+setopt hist_ignore_space hist_reduce_blanks # ヒストリ
+setopt no_flow_control                      # 入出力
+setopt no_beep emacs                        # コマンドライン編集
+
+## モジュール
+# zmodload zsh/mathfunc
+
+## キーバインド
+bindkey ^P history-beginning-search-backward
+bindkey ^N history-beginning-search-forward
 
 # エイリアス {{{1
 ## デフォルトオプションの設定
@@ -46,7 +54,6 @@ alias ,b='vim ~/.bashrc'
 alias ,g='vim ~/.gitconfig'
 alias ,p='vim ~/.config/peco/config.json'
 alias ,v='vim ~/.vimrc'
-alias ,v='vim ~/.vimrc'
 alias ,z="vim ~/.zshrc && exec $SHELL"
 
 ## 拡張子エイリアス
@@ -59,9 +66,12 @@ fi
 alias -s go='go run'
 
 # グローバルエイリアス
+alias -g ...='../..'
+alias -g ....='../../..'
 alias -g F='|fzf'
 alias -g G='|egrep'
 alias -g P='|peco'
+alias -g V='|vimpager'
 
 # その他
 alias history-all='history -n 1'
@@ -86,16 +96,14 @@ function gifize(){
 # Golang
 export GOPATH=$HOME/dev
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-# 以下は必須ではないが
-export MYGITHUB=$GOPATH/src/github.com/ryotako
 
 # added by Anaconda3 4.1.1 installer
 export PATH="//anaconda/bin:$PATH"
 
-# loacl setting {{{
+# loacl setting {{{1
 if [ -f ~/.zshrc_local ];then
   source ~/.zshrc_local
 fi
 
-# Modeline {{{1
 # vim:set foldmethod=marker:
+typeset -U name_of_the_variable
