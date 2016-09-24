@@ -117,7 +117,7 @@ NeoBundle 'mattn/webapi-vim'   " gist-vimのために必要
 NeoBundle 'fatih/vim-go'
 NeoBundle 'lervag/vimtex'
 NeoBundle 'mhaig/vim-blockdiag-series'
-NeoBundle 'plasticboy/vim-markdown'
+" NeoBundle 'plasticboy/vim-markdown'
 " NeoBundle 'termoshtt/unite-bibtex'
 
 " memo {{{2
@@ -221,9 +221,9 @@ set hlsearch   " 検索文字列のハイライト
 " let s:cui_colorscheme = 'stonewashed-256'
 " let s:gui_colorscheme = 'stonewashed-gui'
 " let s:lightline_color = 'solarized'
-let s:cui_colorscheme = 'iceberg'
-let s:gui_colorscheme = 'iceberg'
-let s:lightline_color = 'iceberg'
+let s:cui_colorscheme = 'jellybeans'
+let s:gui_colorscheme = 'jellybeans'
+let s:lightline_color = 'jellybeans'
 
 " 上で色設定しておくと，後はよしなにする
 let s:scheme = has('gui_running') && len(s:gui_colorscheme) 
@@ -254,6 +254,9 @@ inoremap <C-f> <C-g>U<Right>
 " 行頭行末移動(undo履歴分断) A, End
 inoremap <C-a> <C-o>^
 inoremap <C-e> <C-o>$
+
+" 一文字先を消す．試験的に
+inoremap <C-l> <C-g>U<Right><BS>
 
 " Command Mode {{{2
 " emacs風(というか，シェル風)に入れ替え
@@ -303,11 +306,6 @@ noremap  j      gj
 noremap  k      gk
 noremap  <DOWN> gj
 noremap  <UP>   gk
-
-" インデント変更の連続実行
-" ドットリピートでもできるが，これは選択された状態が持続する
-vnoremap < <gv
-vnoremap > >gv
 
 " 設定のトグル
 nnoremap t <Nop>
@@ -408,7 +406,7 @@ nnoremap <silent> [unite]g :<C-u>Unite -silent -no-start-insert -vertical -winwi
 nnoremap <silent> [unite]G :<C-u>call <SID>my_unite_giti()<CR>
 nnoremap <silent> [unite]z :<C-u>Unite -silent -no-start-insert -vertical -winwidth=40 fold <CR>
 nnoremap <silent> [unite]o :<C-u>Unite -silent -no-start-insert -vertical -winwidth=40 outline mark <CR>
-nnoremap <silent><expr> [unite]C <SID>WanderUniteColorScheme()
+nnoremap <silent> [unite]C :<C-u>Unite -auto-preview -vertical -winwidth=40 colorscheme <CR>
 nnoremap <silent> [unite]F :<C-u>Unite -auto-preview -vertical -winwidth=40 font <CR>
 
 cabbrev U Unite
