@@ -4,7 +4,8 @@ source $(brew --prefix)/etc/profile.d/z.sh      # z
 
 # 基本設定 {{{1
 ## ヘルプ (homebrewでzshを入れた関係で必要)
-unalias run-help && autoload run-help
+unalias run-help 
+autoload run-help
 HELPDIR=/usr/local/share/zsh/help
 
 ## エディタ，ページャ
@@ -29,7 +30,7 @@ zstyle ':completion:*:default' menu select=2 # 現在の選択肢を反転表示
 setopt auto_cd auto_pushd pushd_ignore_dups # ディレクトリ変更
 setopt list_rows_first menu_complete        # 補完
 setopt equals                               # ファイル名展開とグロブ
-setopt hist_ignore_space hist_reduce_blanks # ヒストリ
+setopt hist_ignore_dups hist_reduce_blanks # ヒストリ
 setopt no_flow_control                      # 入出力
 setopt no_beep emacs                        # コマンドライン編集
 
@@ -72,6 +73,10 @@ alias -g F='|fzf'
 alias -g G='|egrep'
 alias -g P='|peco'
 alias -g V='|vimpager'
+alias -g _="1>/dev/null"
+alias -g __="2>/dev/null"
+alias -g ___="1>/dev/null 2>/dev/null"
+alias -g Q="&& echo y || echo n"
 
 # その他
 alias history-all='history -n 1'
