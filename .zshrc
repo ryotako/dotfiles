@@ -98,9 +98,18 @@ function gifize(){
   ffmpeg -i $1 -vf scale=$2:-1 -r 5 $1.gif
 }
 
+# パス関連 {{{1
+
+# 自作スクリプトの場所
+export BINPATH="$HOME/bin"
+export PATH="$PATH:$BINPATH"
+
+# Igor Pro
+export IGORPATH="$HOME/Dropbox/Igor Pro User Files"
+
 # Golang
-export GOPATH=$HOME/dev
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export GOPATH="$HOME/dev"
+export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
 
 # added by Anaconda3 4.1.1 installer
 export PATH="//anaconda/bin:$PATH"
