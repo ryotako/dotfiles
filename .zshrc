@@ -28,11 +28,11 @@ zstyle ':completion:*:default' menu select=2 # 現在の選択肢を反転表示
 
 ## オプション
 setopt auto_cd auto_pushd pushd_ignore_dups # ディレクトリ変更
-setopt list_rows_first menu_complete        # 補完
-setopt equals                               # ファイル名展開とグロブ
-setopt hist_ignore_dups hist_reduce_blanks # ヒストリ
-setopt no_flow_control                      # 入出力
-setopt no_beep emacs                        # コマンドライン編集
+setopt list_rows_first menu_complete # 補完
+setopt equals # ファイル名展開とグロブ
+setopt share_history hist_ignore_all_dups hist_reduce_blanks # ヒストリ
+setopt no_flow_control # 入出力
+setopt no_beep emacs # コマンドライン編集
 
 ## モジュール
 # zmodload zsh/mathfunc
@@ -67,16 +67,21 @@ fi
 alias -s go='go run'
 
 # グローバルエイリアス
+## 移動系
 alias -g ...='../..'
 alias -g ....='../../..'
+## フィルタ系
 alias -g F='|fzf'
 alias -g G='|egrep'
 alias -g P='|peco'
+## 閲覧系
+alias -g H='--help' # 簡易ヘルプ
 alias -g V='|vimpager'
-alias -g _="1>/dev/null"
-alias -g __="2>/dev/null"
-alias -g ___="1>/dev/null 2>/dev/null"
-alias -g Q="&& echo y || echo n"
+alias -g Q="&& echo y || echo n" # Question, 終了コード判定
+## 出力抑制系
+alias -g _="1>/dev/null"  # エラーが読みたいとき
+alias -g __="2>/dev/null" # エラーがいらないとき
+alias -g ___="1>/dev/null 2>/dev/null" # サイレント
 
 # その他
 alias history-all='history -n 1'
@@ -102,17 +107,20 @@ function gifize(){
 
 # 自作スクリプトの場所
 export BINPATH="$HOME/bin"
-export PATH="$PATH:$BINPATH"
+export PATH="$BINPATH:$PATH"
+
+# Homebrew
+export PATH="/usr/local/bin:$PATH"
 
 # Igor Pro
 export IGORPATH="$HOME/Dropbox/Igor Pro User Files"
 
 # Golang
 export GOPATH="$HOME/dev"
-export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 
 # added by Anaconda3 4.1.1 installer
-export PATH="//anaconda/bin:$PATH"
+export PATH="/anaconda/bin:$PATH"
 
 # loacl setting {{{1
 if [ -f ~/.zshrc_local ];then
