@@ -643,8 +643,12 @@ let g:tex_flavor='latex'
 let g:vimtex_fold_enabled             = 1 " LaTeX文法による折りたたみを有効
 let g:vimtex_fold_manual              = 1 " 自動折りたたみを無効
 let g:vimtex_quickfix_open_on_warning = 0 " 警告のみの場合メッセージを表示しない
-let g:vimtex_view_general_viewer
-      \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+if has('win64') || has('win32')
+  let g:vimtex_view_general_viewer='SumatraPDF'
+else
+  let g:vimtex_view_general_viewer
+        \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+endif
 let g:vimtex_view_general_options = '@line @pdf @tex'
 
 " " key mapping
