@@ -523,9 +523,9 @@ nmap <expr> gp yankround#is_active() ?
 nmap <expr> gP yankround#is_active() ?
       \ "\<Plug>(yankround-next)" : "\<Plug>(yankround-gP)"
 
-" xでレジスタを汚さない＆x連打はまとめてundo履歴に登録
+" x連打でレジスタを汚さない消去 ＆ まとめてundo履歴に登録
 call submode#enter_with('x', 'n', '', 'x', '"_x')
-call submode#map('x', 'n', '', 'x', ":\<C-u>undojoin <bar> normal! \"_x<CR>")
+call submode#map('x', 'n', '', 'x', ":<C-u>undojoin <bar> normal! \"_x<CR>")
 
 " Sはccと機能が重複するので潰す
 nmap S <Plug>(operator-replace)
