@@ -309,6 +309,7 @@ noremap  <UP>   gk
 
 " 設定のトグル
 nnoremap t <Nop>
+nnoremap <expr> tc <SID>ToggleOption('conceallevel', '', [0,2])
 nnoremap <expr> th <SID>ToggleOption('hlsearch', '', [])
 nnoremap <expr> tl <SID>ToggleOption('list',     '', [])
 nnoremap <expr> tn <SID>ToggleOption('number',   '', [])
@@ -330,12 +331,12 @@ function! s:ToggleOption(option,key,list) "{{{
       execute "let current = &".a:option
       let i = index(a:list,current)+1
       let i = i>=len(a:list) ? 0 : i
-      execute 'setl '.a:option.'='.a:list[i]
+      execute 'setlocal '.a:option.'='.a:list[i]
     else
-      execute 'setl '.a:option.'!'
+      execute 'setlocal '.a:option.'!'
     endif
     redraw
-    execute 'setl '.a:option.'?'
+    execute 'setlocal '.a:option.'?'
     if strlen(a:key) == 0
       return ''
     endif
