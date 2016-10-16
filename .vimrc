@@ -8,138 +8,141 @@ augroup vimrc
 augroup END
 " }}}1
 
-" NeoBundle {{{1
-
-" neobundle begin{{{2
-if has('vim_starting')
-  if &compatible
-    set nocompatible
-  endif
-  set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
+" Dein {{{1
+" directory
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+" install dein itself
+if !isdirectory(s:dein_repo_dir)
+  execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
 endif
-call neobundle#begin(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
+execute 'set runtimepath^=' . s:dein_repo_dir
 
-" Shougo-ware {{{2
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'Shougo/vimproc.vim'
-NeoBundle 'Shougo/vimshell.vim'
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-" unite source {{{2
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/neoyank.vim'
-NeoBundle 'Shougo/unite-help'
-NeoBundle 'Shougo/unite-outline'
-NeoBundle 'haya14busa/unite-reading-vimrc'
-NeoBundle 'lambdalisue/unite-linephrase'
-NeoBundle 'osyo-manga/unite-fold'
-NeoBundle 'osyo-manga/unite-highlight'
-NeoBundle 'osyo-manga/unite-qfixhowm'
-NeoBundle 'rhysd/unite-codic.vim'
-NeoBundle 'sorah/unite-ghq'
-NeoBundle 'tacroe/unite-mark'
-NeoBundle 'thinca/vim-unite-history'
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'ujihisa/unite-font'
+  " Shougo-ware {{{2
+  call dein#add('Shougo/dein.vim')
+  call dein#add('Shougo/neocomplete.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/vimfiler.vim')
+  call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+  call dein#add('Shougo/vimshell.vim')
 
-" neocomplete source {{{2
-NeoBundle 'Shougo/neco-syntax'
-NeoBundle 'Shougo/neco-vim'
-NeoBundle 'ujihisa/neco-look'
+  " unite source {{{2
+  call dein#add('Shougo/neomru.vim')
+  call dein#add('Shougo/neoyank.vim')
+  call dein#add('Shougo/unite-help')
+  call dein#add('Shougo/unite-outline')
+  call dein#add('haya14busa/unite-reading-vimrc')
+  call dein#add('lambdalisue/unite-linephrase')
+  call dein#add('osyo-manga/unite-fold')
+  call dein#add('osyo-manga/unite-highlight')
+  call dein#add('osyo-manga/unite-qfixhowm')
+  call dein#add('rhysd/unite-codic.vim')
+  call dein#add('sorah/unite-ghq')
+  call dein#add('tacroe/unite-mark')
+  call dein#add('thinca/vim-unite-history')
+  call dein#add('ujihisa/unite-colorscheme')
+  call dein#add('ujihisa/unite-font')
 
-" extend basic vim commands {{{2
-NeoBundle 'Konfekt/FastFold'          " neocompleteしながら折畳みするために
-NeoBundle 'LeafCage/foldCC.vim'       " 見やすい折りたたみ表示
-NeoBundle 'LeafCage/yankround.vim'    " ヤンク履歴を管理
-NeoBundle 'easymotion/vim-easymotion' " 見えている場所に素早く移動
-NeoBundle 'haya14busa/incsearch.vim'  " 検索中に対象をハイライト
-NeoBundle 'itchyny/lightline.vim'     " ステータスライン拡張
-NeoBundle 'kana/vim-niceblock'        " ビジュアルモードのI,Aの挙動を矩形選択に
-NeoBundle 'kana/vim-submode'          " 連打で便利に
-NeoBundle 'osyo-manga/vim-anzu'       " 検索の一致件数を取得
-NeoBundle 'osyo-manga/vim-brightest'  " カーソル下と同じ単語をハイライト
-NeoBundle 'osyo-manga/vim-over'       " 置換対象をハイライト
-NeoBundle 'rhysd/clever-f.vim'        " fの検索後，f連打で次の一致箇所へ
-NeoBundle 'sjl/gundo.vim'             " undo履歴の可視化
-NeoBundle 'terryma/vim-expand-region' " 選択範囲の拡大・縮小
-NeoBundle 'thinca/vim-visualstar'     " ビジュアル選択した文字列を検索
-NeoBundle 'tpope/vim-repeat'          " 動作をリピート可能にする機構を提供
-NeoBundle 'vim-jp/vimdoc-ja'          " 日本語ヘルプ
+  " neocomplete source {{{2
+  call dein#add('Shougo/neco-syntax')
+  call dein#add('Shougo/neco-vim')
+  call dein#add('ujihisa/neco-look')
 
-" operator {{{2
-NeoBundle 'kana/vim-operator-user'         " operator自作のための機構
-NeoBundle 'thinca/vim-operator-sequence'   " 複数operatorの統合
-NeoBundle 'haya14busa/vim-operator-flashy' " y: ヤンクを可視化
-NeoBundle 'kana/vim-operator-replace'      " S: レジスタから貼付け
-NeoBundle 'tyru/operator-camelize.vim'     " _: キャメル・スネークケース入替え
+  " extend basic vim commands {{{2
+  call dein#add('Konfekt/FastFold')          "neocompleteで折畳みするために
+  call dein#add('LeafCage/foldCC.vim')       "見やすい折りたたみ表示
+  call dein#add('LeafCage/yankround.vim')    "ヤンク履歴を管理
+  call dein#add('easymotion/vim-easymotion') "見えている場所に素早く移動
+  call dein#add('haya14busa/incsearch.vim')  "検索中に対象をハイライト
+  call dein#add('itchyny/lightline.vim')     "ステータスライン拡張
+  call dein#add('kana/vim-niceblock')        "visual modeのI,Aの挙動を矩形選択に
+  call dein#add('kana/vim-submode')          "連打で便利に
+  call dein#add('osyo-manga/vim-anzu')       "検索の一致件数を取得
+  call dein#add('osyo-manga/vim-brightest')  "カーソル下と同じ単語をハイライト
+  call dein#add('osyo-manga/vim-over')       "置換対象をハイライト
+  call dein#add('rhysd/clever-f.vim')        "fの検索後，f連打で次の一致箇所へ
+  call dein#add('sjl/gundo.vim')             "undo履歴の可視化
+  call dein#add('terryma/vim-expand-region') "選択範囲の拡大・縮小
+  call dein#add('thinca/vim-visualstar')     "ビジュアル選択した文字列を検索
+  call dein#add('tpope/vim-repeat')          "動作をリピート可能にする機構を提供
+  call dein#add('vim-jp/vimdoc-ja')          "日本語ヘルプ
 
-" text object {{{2
-" builtin w, W, s, p, [, ], (,), <, >, {, }, ", ', `
-" replace q('), d(")
-" vimtex  e, d, c, $, m(math, m=$)
-NeoBundle 'kana/vim-textobj-user'             " textobj自作のための機構
-NeoBundle 'kana/vim-textobj-entire'           " a: 全て (all, e -> environment)
-NeoBundle 'osyo-manga/vim-textobj-multiblock' " b: 囲まれた範囲
-NeoBundle 'kana/vim-textobj-fold'             " z: 折畳みの範囲
-NeoBundle 'kana/vim-textobj-indent'           " i: 字下げの範囲
-NeoBundle 'kana/vim-textobj-line'             " l: 行
-NeoBundle 'h1mesuke/textobj-wiw'              " v: スネークケースの一部 (v+v=w)
-NeoBundle 'mattn/vim-textobj-url'             " u: URL
-NeoBundle 'thinca/vim-textobj-comment'        " /: コメント
+  " operator {{{2
+  call dein#add('kana/vim-operator-user')         "operator自作のための機構
+  call dein#add('thinca/vim-operator-sequence')   "複数operatorの統合
+  call dein#add('haya14busa/vim-operator-flashy') "y:ヤンクを可視化
+  call dein#add('kana/vim-operator-replace')      "S:レジスタから貼付け
+  call dein#add('tyru/operator-camelize.vim')     "_:camel-snake入れ替え
 
-" scripting {{{2
-NeoBundle 'cohama/lexima.vim'         " 対括弧補完．古いvimだとIMEに干渉する？
-NeoBundle 'LeafCage/vimhelpgenerator' " vimプラグインヘルプ生成
-NeoBundle 'junegunn/vim-easy-align'   " 簡単位置揃え
-NeoBundle 'koron/codic-vim'           " プログラマ向け辞書
-NeoBundle 'tpope/vim-commentary'      " 疑似operator gc: comment/uncomment line
-NeoBundle 'tpope/vim-surround'        " 疑似textobj s: change/delete surrounding
-NeoBundle 'thinca/vim-prettyprint'    " vimの変数のprettyprint
-NeoBundle 'tyru/capture.vim'          " unite outputと異なり素のバッファに出力
-NeoBundle 'AndrewRadev/switch.vim'    " 指定した切り替える
+  " text object {{{2
+  " builtin w, W, s, p, [, ], (,), <, >, {, }, ", ', `
+  " replace q('), d(")
+  " vimtex  e, d, c, $, m(math, m=$)
+  call dein#add('kana/vim-textobj-user')             "textobj自作のための機構
+  call dein#add('kana/vim-textobj-entire')           "a:全て(all,e->environment)
+  call dein#add('osyo-manga/vim-textobj-multiblock') "b:囲まれた範囲
+  call dein#add('kana/vim-textobj-fold')             "z:折畳みの範囲
+  call dein#add('kana/vim-textobj-indent')           "i:字下げの範囲
+  call dein#add('kana/vim-textobj-line')             "l:行
+  call dein#add('h1mesuke/textobj-wiw')              "v:snake caseの一部(v+v=w)
+  call dein#add('mattn/vim-textobj-url')             "u:URL
+  call dein#add('thinca/vim-textobj-comment')        "/:コメント
 
-" git {{{2
-NeoBundle 'tpope/vim-fugitive' " vimからgit
-NeoBundle 'cohama/agit.vim'    " commit履歴を可視化
-NeoBundle 'mattn/gist-vim'     " gistにアクセス
-NeoBundle 'mattn/webapi-vim'   " gist-vimのために必要
+  "scripting {{{2
+  call dein#add('cohama/lexima.vim')         "対括弧補完．古いvimだとIMEに干渉？
+  call dein#add('LeafCage/vimhelpgenerator') "vimプラグインヘルプ生成
+  call dein#add('junegunn/vim-easy-align')   "簡単位置揃え
+  call dein#add('koron/codic-vim')           "プログラマ向け辞書
+  call dein#add('tpope/vim-commentary')      "疑似operatorgc:comment/uncomment
+  call dein#add('tpope/vim-surround')        "疑似textobjs:surroundingの変更削除
+  call dein#add('thinca/vim-prettyprint')    "vimの変数のprettyprint
+  call dein#add('tyru/capture.vim')          "uniteoutputと異なり素バッファ出力
+  call dein#add('AndrewRadev/switch.vim')    "指定したパターンで切り替える
+  call dein#add('ntpeters/vim-better-whitespace') " 行末スペース可視化
 
-" language supports {{{2
-NeoBundle 'fatih/vim-go'
-NeoBundle 'lervag/vimtex'
-NeoBundle 'mhaig/vim-blockdiag-series'
-" NeoBundle 'plasticboy/vim-markdown'
-" NeoBundle 'termoshtt/unite-bibtex'
+  "git {{{2
+  call dein#add('tpope/vim-fugitive') "vimからgit
+  call dein#add('cohama/agit.vim')    "commit履歴を可視化
+  call dein#add('mattn/gist-vim')     "gistにアクセス
+  call dein#add('mattn/webapi-vim')   "gist-vimのために必要
 
-" memo {{{2
-NeoBundle 'fuenor/qfixgrep'
-NeoBundle 'fuenor/qfixhowm'
-NeoBundle 'glidenote/memolist.vim'
+   "language supports {{{2
+  call dein#add('fatih/vim-go')
+  call dein#add('lervag/vimtex')
+  call dein#add('mhaig/vim-blockdiag-series')
 
-" colorscheme {{{2
-let g:i_am_not_pika_beast = 1          " すぐにはコロコロしない
-NeoBundle 'anekos/colocolo.vim'        " 色がコロコロ変わる
-NeoBundle 'cocopon/iceberg.vim'        " 黒地青基調．
-NeoBundle 'flazz/vim-colorschemes'     " カラースキームカタログ
-NeoBundle 'popkirby/lightline-iceberg' " lightlineのiceberg
-NeoBundle 'rhysd/try-colorscheme.vim'  " インストールせずに試す
+   "memo {{{2
+  call dein#add('fuenor/qfixgrep')
+  call dein#add('fuenor/qfixhowm')
+  call dein#add('glidenote/memolist.vim')
 
-" my plugins
-NeoBundle 'ryotako/unite-latex-package',
-      \{"base" : "~/.vim/plugins","type" : "nosync" }
-NeoBundle "ryotako/vim-incline",
-      \{"base" : "~/.vim/plugins","type" : "nosync" }
+  " colorscheme {{{2
+  call dein#add('anekos/colocolo.vim')        "色がコロコロ変わる
+  call dein#add('cocopon/iceberg.vim')        "黒地青基調．
+  call dein#add('flazz/vim-colorschemes')     "カラースキームカタログ
+  call dein#add('popkirby/lightline-iceberg') "lightlineのiceberg
+  call dein#add('rhysd/try-colorscheme.vim')  "インストールせずに試す
 
-" neobundle end{{{2
-call neobundle#end()
-filetype plugin indent on
-syntax on
-NeoBundleCheck
+  "my plugins
+  call dein#add('ryotako/unite-latex-package')
+  call dein#add('ryotako/vim-incline')
+
+  call dein#end()
+  call dein#save_state()
+endif
+
+" install check
+if !has('vim_starting') && dein#check_install()
+  call dein#install()
+endif
 "}}}1
+filetype plugin indent on
+syntax enable
 
 " Basic {{{1
 
@@ -229,6 +232,7 @@ let g:lightline = {'colorscheme' : s:lightline_color}
 let g:lightline.component = {'lineinfo': '%3l[%L]:%-2v'}
 
 " カラースキームをランダムに変更
+let g:i_am_not_pika_beast=1
 command! -nargs=0 Colo highlight clear | ColoColo | redraw | colorscheme
 
 " その他
@@ -287,14 +291,7 @@ noremap H ^
 noremap L $
 
 " エスケープ系
-" <C-[>に慣れるキャンペーン実施中
 nnoremap <ESC><ESC> :nohlsearch<CR>
-
-" jj, <C-j>の両方を<ESC>の代用に設定．<ESC>連打でnohlsearch
-" noremap  <C-j> <ESC>
-" inoremap <C-j> <ESC>
-" inoremap jj    <ESC>
-" nnoremap <C-j><C-j> :nohlsearch<CR>
 
 " 表示行で移動
 noremap  j      gj
@@ -314,6 +311,7 @@ nnoremap <expr> tw <SID>ToggleOption('wrap',         '', [])
 nnoremap <expr> tf <SID>ToggleOption('foldmethod','f'
       \,['manual','indent','expr','marker','syntax','diff'])
 nnoremap tb :<C-u>BrightestToggle<CR>
+nnoremap t_ :<C-u>ToggleWhitespace<CR>
 
 " keyを指定すると最初の呼び出しで変更を行わず，key連打で変更を繰り返す．
 function! s:ToggleOption(option,key,list) "{{{
