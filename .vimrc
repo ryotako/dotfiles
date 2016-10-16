@@ -6,11 +6,6 @@ scriptencoding utf-8
 augroup vimrc
   autocmd!
 augroup END
-" 古いvimではvimrcを読まない
-if v:version < 700
-  echoerr 'This .vimrc requires Vim 7 or later.'
-  quit
-endif
 " }}}1
 
 " NeoBundle {{{1
@@ -152,7 +147,6 @@ NeoBundleCheck
 set fileencodings=cp932,sjis,euc-jp,utf-8
 set fileformat=unix   " 改行コードを<LF>に
 set spelllang=en,cjk  " アジア圏言語をスペルミス判定しない
-set formatoptions=q   " 勝手に改行させない
 set ambiwidth=double  " 文字幅が判別できない時は全角扱い
 set display+=lastline " 長い行を省略しない
 set helplang=ja,en    " ヘルプは日本語を優先
@@ -178,7 +172,7 @@ set foldlevel=99      " 勝手に閉じない
 set foldlevelstart=99 " 編集開始時には全て開く
 set laststatus=2      " 常にステータス行を表示
 set lazyredraw        " 直接実行したコマンドでない場合再描画しない
-set matchtime=1       " 対応括弧表示時間(サブ秒)   
+set matchtime=1       " 対応括弧表示時間(サブ秒)
 set nolist            " 不可視文字は不可視
 set number            " 行番号を表示
 set showmatch         " 対応括弧表示
@@ -190,7 +184,7 @@ set wildmenu          " ステータスラインに補完候補を並べる
 set wrap              " 長い行の折り返し
 
 " conceal無効．
-autocmd vimrc BufNewFile,BufRead * set conceallevel=0
+autocmd vimrc BufNewFile,BufRead * setlocal conceallevel=0
 " textwidthより右を塗りつぶす
 execute "set colorcolumn=".join(range(&textwidth+1, 999), ',')
 
@@ -202,7 +196,8 @@ set softtabstop=2     " 連続した空白をカーソルで移動する際の�
 set autoindent        " 改行時にインデントを継続
 set smartindent       " 入力内容に合わせたインデントの増減
 set breakindent       " wrapした文章もインデントして表示
-set formatoptions-=ro " 改行時に自動コメントアウトしない
+set formatoptions-=o " 改行時に自動コメントアウトしない
+set formatoptions-=r " 改行時に自動コメントアウトしない2
 
 " カーソル移動等
 set backspace=indent,eol,start " 行をまたぐバックスペースを有効化
@@ -226,7 +221,7 @@ let s:gui_colorscheme = 'jellybeans'
 let s:lightline_color = 'jellybeans'
 
 " 上で色設定しておくと，後はよしなにする
-let s:scheme = has('gui_running') && len(s:gui_colorscheme) 
+let s:scheme = has('gui_running') && len(s:gui_colorscheme)
       \ ? s:gui_colorscheme : s:cui_colorscheme
 execute 'colorscheme '.s:scheme
 execute 'autocmd vimrc GUIEnter * nested set t_Co=256 | colorscheme '.s:scheme
@@ -262,10 +257,10 @@ inoremap <C-l> <C-g>U<Right><BS>
 " emacs風(というか，シェル風)に入れ替え
 
 " 前後移動 Backward, Forward
-" <spacce><BS>は補完を抜ける儀式
+" <space><BS>は補完を抜ける儀式
 cnoremap <C-b> <space><BS><left>
 cnoremap <C-f> <space><BS><right>
-cnoremap <C-x> <C-f> 
+cnoremap <C-x> <C-f>
 
 " 行頭行末移動 A, End
 " <C-e>はもともと行末移動
@@ -309,12 +304,12 @@ noremap  <UP>   gk
 
 " 設定のトグル
 nnoremap t <Nop>
-nnoremap <expr> tc <SID>ToggleOption('conceallevel', '', [0,2])
-nnoremap <expr> th <SID>ToggleOption('hlsearch', '', [])
-nnoremap <expr> tl <SID>ToggleOption('list',     '', [])
-nnoremap <expr> tn <SID>ToggleOption('number',   '', [])
-nnoremap <expr> ts <SID>ToggleOption('spell',    '', [])
-nnoremap <expr> tw <SID>ToggleOption('wrap',     '', [])
+nnoremap <expr> tc <SID>ToggleOption('conceallevel', '', [0, 2])
+nnoremap <expr> th <SID>ToggleOption('hlsearch',     '', [])
+nnoremap <expr> tl <SID>ToggleOption('list',         '', [])
+nnoremap <expr> tn <SID>ToggleOption('number',       '', [])
+nnoremap <expr> ts <SID>ToggleOption('spell',        '', [])
+nnoremap <expr> tw <SID>ToggleOption('wrap',         '', [])
       \. (&wrap == 'wrap') ? '^' : ''
 nnoremap <expr> tf <SID>ToggleOption('foldmethod','f'
       \,['manual','indent','expr','marker','syntax','diff'])
@@ -515,11 +510,11 @@ nmap yy <plug>(operator-flashy)<Plug>(operator-flashy)
 let g:yankround_use_region_hl = 1
 let g:yankround_max_history   = 100
 let g:yankround_region_hl_groupname = g:operator#flashy#group
-nmap <expr> p  yankround#is_active() ? 
+nmap <expr> p  yankround#is_active() ?
       \ "\<Plug>(yankround-prev)" : "\<Plug>(yankround-p)"
 nmap <expr> P  yankround#is_active() ?
       \ "\<Plug>(yankround-next)" : "\<Plug>(yankround-P)"
-nmap <expr> gp yankround#is_active() ? 
+nmap <expr> gp yankround#is_active() ?
       \ "\<Plug>(yankround-prev)" : "\<Plug>(yankround-gp)"
 nmap <expr> gP yankround#is_active() ?
       \ "\<Plug>(yankround-next)" : "\<Plug>(yankround-gP)"
@@ -724,8 +719,6 @@ augroup vimrc_blockdiag
 augroup END
 
 " linewise increment {{{2
-map ga <Plug>(incline-inc)
-map gx <Plug>(incline-dec)
 vmap <expr> <C-a>  mode() ==# "V" ? "\<Plug>(incline-inc)"          : "\<C-a>"
 vmap <expr> <C-x>  mode() ==# "V" ? "\<Plug>(incline-dec)"          : "\<C-x>"
 vmap <expr> g<C-a> mode() ==# "V" ? "\<Plug>(incline-inc-inclined)" : "g\<C-a>"

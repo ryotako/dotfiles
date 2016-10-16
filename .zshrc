@@ -83,10 +83,6 @@ alias -g _="1>/dev/null"  # エラーが読みたいとき
 alias -g __="2>/dev/null" # エラーがいらないとき
 alias -g ___="1>/dev/null 2>/dev/null" # サイレント
 
-# その他
-alias history-all='history -n 1'
-alias div="tr ' ' '\n'"
-
 # ペコる
 alias j='cd "$(z | sort -rn | cut -c 12- | peco)"'
 alias h='$(history -n 1 | peco)'
@@ -94,6 +90,10 @@ alias s='cd $(ghq list --full-path | peco)'
 alias brewlabels='for B in $(brew list);do echo "$B: "$(brew info $B | sed -n "2p") ; done'
 
 # その他 {{{1
+# その他
+alias history-all='history -n 1'
+alias div="tr ' ' '\n'"
+
 function showoptions() {
   set -o | sed -e 's/^no\(.*\)on$/\1  off/' -e 's/^no\(.*\)off$/\1  on/'
 }
@@ -118,9 +118,6 @@ export IGORPATH="$HOME/Dropbox/Igor Pro User Files"
 # Golang
 export GOPATH="$HOME/dev"
 export PATH="$GOPATH/bin:$PATH"
-
-# added by Anaconda3 4.1.1 installer
-export PATH="/anaconda/bin:$PATH"
 
 # loacl setting {{{1
 if [ -f ~/.zshrc_local ];then
