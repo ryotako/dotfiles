@@ -72,6 +72,8 @@ if dein#load_state(s:dein_dir)
   call dein#add('tpope/vim-repeat')          "動作をリピート可能にする機構を提供
   call dein#add('vim-jp/vimdoc-ja')          "日本語ヘルプ
 
+  call dein#add('haya14busa/vim-asterisk')
+
   " operator {{{2
   call dein#add('kana/vim-operator-user')         "operator自作のための機構
   call dein#add('thinca/vim-operator-sequence')   "複数operatorの統合
@@ -463,17 +465,23 @@ vnoremap <tab>   :sort<CR>
 
 " search (incsearch / anzu / visualstar / over / brightest) {{{2
 let g:incsearch#auto_nohlsearch = 1
-nnoremap <Space>/ /
+" incsearch
+" 日本語検索のために標準の/を残しておく
+nnoremap <Space>/ / 
 map  /  <Plug>(incsearch-forward)
 map  ?  <Plug>(incsearch-backward)
 map  g/ <Plug>(incsearch-stay)
-nmap n  <Plug>(incsearch-nohl)<plug>(anzu-n-with-echo)
-nmap N  <Plug>(incsearch-nohl)<plug>(anzu-N-with-echo)
-map  *  <Plug>(incsearch-nohl-*)
-map  #  <Plug>(incsearch-nohl-#)
-map  g* <Plug>(incsearch-nohl-g*)
-map  g# <Plug>(incsearch-nohl-g#)
-vmap *  <plug>(visualstar-*)
+" incsearch + anzu
+map  n <Plug>(incsearch-nohl-n)
+map  N <Plug>(incsearch-nohl-N)
+nmap n <Plug>(incsearch-nohl)<Plug>(anzu-n-with-echo)
+nmap N <Plug>(incsearch-nohl)<Plug>(anzu-N-with-echo)
+" incsearch + asterisk
+map *  <Plug>(incsearch-nohl)<Plug>(asterisk-*)
+map g* <Plug>(incsearch-nohl)<Plug>(asterisk-g*)
+map #  <Plug>(incsearch-nohl)<Plug>(asterisk-#)
+map g# <Plug>(incsearch-nohl)<Plug>(asterisk-g#)
+" over
 nnoremap gs :<C-u>OverCommandLine<CR>%s/
 xnoremap gs :OverCommandLine<CR>s/
 let g:brightest_enable = 0
