@@ -1,7 +1,7 @@
 # Path
 export PATH="$PATH:$HOME/bin"
 # Golang
-export GOPATH=$HOME/dev
+export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 # manをvimで開く
