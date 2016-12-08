@@ -21,8 +21,9 @@ execute 'set runtimepath^=' . s:dein_repo_dir
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  " Shougo-ware {{{2
+" Shougo-ware {{{2
   call dein#add('Shougo/dein.vim')
+  call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/neocomplete.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('Shougo/neosnippet.vim')
@@ -30,8 +31,10 @@ if dein#load_state(s:dein_dir)
   call dein#add('Shougo/vimfiler.vim')
   call dein#add('Shougo/vimproc.vim', {'build': 'make'})
   call dein#add('Shougo/vimshell.vim')
+  call dein#add('Shougo/neoinclude.vim')
+  call dein#add('haya14busa/dein-command.vim')
 
-  " unite source {{{2
+" unite source {{{2
   call dein#add('Shougo/neomru.vim')
   call dein#add('Shougo/neoyank.vim')
   call dein#add('Shougo/unite-help')
@@ -48,12 +51,12 @@ if dein#load_state(s:dein_dir)
   call dein#add('ujihisa/unite-colorscheme')
   call dein#add('ujihisa/unite-font')
 
-  " neocomplete source {{{2
+" neocomplete source {{{2
   call dein#add('Shougo/neco-syntax')
   call dein#add('Shougo/neco-vim')
   call dein#add('ujihisa/neco-look')
 
-  " extend basic vim commands {{{2
+" Vim Command Extension {{{2
   call dein#add('Konfekt/FastFold')          "neocompleteで折畳みするために
   call dein#add('LeafCage/foldCC.vim')       "見やすい折りたたみ表示
   call dein#add('LeafCage/yankround.vim')    "ヤンク履歴を管理
@@ -71,20 +74,22 @@ if dein#load_state(s:dein_dir)
   call dein#add('thinca/vim-visualstar')     "ビジュアル選択した文字列を検索
   call dein#add('tpope/vim-repeat')          "動作をリピート可能にする機構を提供
   call dein#add('vim-jp/vimdoc-ja')          "日本語ヘルプ
+  call dein#add('sjl/gundo.vim')             "履歴の管理
 
   call dein#add('haya14busa/vim-asterisk')
+  call dein#add('thinca/vim-quickrun')
 
-  " operator {{{2
+" operator {{{2
   call dein#add('kana/vim-operator-user')         "operator自作のための機構
   call dein#add('thinca/vim-operator-sequence')   "複数operatorの統合
   call dein#add('haya14busa/vim-operator-flashy') "y:ヤンクを可視化
   call dein#add('kana/vim-operator-replace')      "S:レジスタから貼付け
   call dein#add('tyru/operator-camelize.vim')     "_:camel-snake入れ替え
 
-  " text object {{{2
-  " builtin w, W, s, p, [, ], (,), <, >, {, }, ", ', `
-  " replace q('), d(")
-  " vimtex  e, d, c, $, m(math, m=$)
+" text object {{{2
+" builtin w, W, s, p, [, ], (,), <, >, {, }, ", ', `
+" replace q('), d(")
+" vimtex  e, d, c, $, m(math, m=$)
   call dein#add('kana/vim-textobj-user')             "textobj自作のための機構
   call dein#add('kana/vim-textobj-entire')           "a:全て(all,e->environment)
   call dein#add('osyo-manga/vim-textobj-multiblock') "b:囲まれた範囲
@@ -95,7 +100,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('mattn/vim-textobj-url')             "u:URL
   call dein#add('thinca/vim-textobj-comment')        "/:コメント
 
-  "scripting {{{2
+"scripting {{{2
   call dein#add('cohama/lexima.vim')         "対括弧補完．古いvimだとIMEに干渉？
   call dein#add('LeafCage/vimhelpgenerator') "vimプラグインヘルプ生成
   call dein#add('junegunn/vim-easy-align')   "簡単位置揃え
@@ -107,30 +112,37 @@ if dein#load_state(s:dein_dir)
   call dein#add('AndrewRadev/switch.vim')    "指定したパターンで切り替える
   call dein#add('ntpeters/vim-better-whitespace') " 行末スペース可視化
 
-  "git {{{2
+"git {{{2
   call dein#add('tpope/vim-fugitive') "vimからgit
   call dein#add('cohama/agit.vim')    "commit履歴を可視化
   call dein#add('mattn/gist-vim')     "gistにアクセス
   call dein#add('mattn/webapi-vim')   "gist-vimのために必要
 
-   "language supports {{{2
+"language supports {{{2
   call dein#add('fatih/vim-go')
   call dein#add('lervag/vimtex')
   call dein#add('mhaig/vim-blockdiag-series')
+  call dein#add('egison/vim-egison')
+  call dein#add('leseixas/quantum_espresso-vim')
 
-   "memo {{{2
+"memo {{{2
   call dein#add('fuenor/qfixgrep')
   call dein#add('fuenor/qfixhowm')
   call dein#add('glidenote/memolist.vim')
 
-  " colorscheme {{{2
+" colorscheme {{{2
   call dein#add('anekos/colocolo.vim')        "色がコロコロ変わる
   call dein#add('cocopon/iceberg.vim')        "黒地青基調．
   call dein#add('flazz/vim-colorschemes')     "カラースキームカタログ
   call dein#add('popkirby/lightline-iceberg') "lightlineのiceberg
   call dein#add('rhysd/try-colorscheme.vim')  "インストールせずに試す
 
-  "my plugins
+" others {{{2
+  call dein#add('mattn/excelview-vim')
+  call dein#add('rhysd/github-complete.vim')
+  call dein#add('kien/rainbow_parentheses.vim')
+
+"my plugins
   call dein#add('ryotako/unite-latex-package')
   call dein#add('ryotako/vim-incline')
 
@@ -139,16 +151,16 @@ if dein#load_state(s:dein_dir)
 endif
 
 " install check
-if !has('vim_starting') && dein#check_install()
-  call dein#install()
-endif
-"}}}1
+" if !has('vim_starting') && dein#check_install()
+"  call dein#install()
+" endif
 filetype plugin indent on
 syntax enable
+"}}}1
 
 " Basic {{{1
 
-" 文字コード・日本語入力等
+" Input {{{2
 set fileencodings=cp932,sjis,euc-jp,utf-8
 set fileformat=unix   " 改行コードを<LF>に
 set spelllang=en,cjk  " アジア圏言語をスペルミス判定しない
@@ -156,7 +168,7 @@ set ambiwidth=double  " 文字幅が判別できない時は全角扱い
 set display+=lastline " 長い行を省略しない
 set helplang=ja,en    " ヘルプは日本語を優先
 
-" 自動生成されるファイルの設定
+" Auto-created files {{{2
 set swapfile     " swpファイル(未保存の変更内容)の作成の有無
 set backup       " ~ファイル(一世代前のファイル)の作成の有無
 set undofile     " un~ファイル(undo履歴ファイル)の作成の有無
@@ -164,11 +176,11 @@ set directory-=. " その場に作るのはやめる
 let &undodir   = &directory
 let &backupdir = &directory
 
-" パス関連
+" Path {{{2
 set shellslash              " Windowsでもパスの区切りを/とする
 set runtimepath+=$HOME/.vim " ~/.vimにパスを通す
 
-" 見た目の設定
+" Appearance {{{2
 set cmdheight=1       " コマンド行の行数
 set cursorline        " 現在行のハイライト
 set diffopt+=vertical " diffは左右に並べる
@@ -187,13 +199,14 @@ set splitright        " ウィンドウは右に分割
 set textwidth=80      " この文字数以降は折り返す
 set wildmenu          " ステータスラインに補完候補を並べる
 set wrap              " 長い行の折り返し
+set pumheight=10      " 補完ポップアップの最大数
 
 " conceal無効．
 autocmd vimrc BufNewFile,BufRead * setlocal conceallevel=0
 " textwidthより右を塗りつぶす
 execute "set colorcolumn=".join(range(&textwidth+1, 999), ',')
 
-" インデントの設定
+" Indent {{{2
 set expandtab         " タブを入力時に空白に展開
 set tabstop=2         " タブの表示幅
 set shiftwidth=2      " 自動インデントが挿入するタブ幅
@@ -201,34 +214,34 @@ set softtabstop=2     " 連続した空白をカーソルで移動する際の�
 set autoindent        " 改行時にインデントを継続
 set smartindent       " 入力内容に合わせたインデントの増減
 set breakindent       " wrapした文章もインデントして表示
-set formatoptions-=o " 改行時に自動コメントアウトしない
-set formatoptions-=r " 改行時に自動コメントアウトしない2
+set formatoptions=    " 改行時に自動コメントアウトしない
 
-" カーソル移動等
+" Cursor Moving {{{2
 set backspace=indent,eol,start " 行をまたぐバックスペースを有効化
 set mouse=a                    " すべてのモードでマウスを有効化
 set ttymouse=xterm2            " マウスの種類
-set clipboard=unnamed          " クリップボードを使用
 set virtualedit=block          " 矩形選択で文字のない箇所にカーソル移動可
+set clipboard=unnamed,unnamedplus        " クリップボードを使用
 
-" 検索関連
+" Search {{{2
 set ignorecase " 大文字小文字を区別しない
 set smartcase  " ただし大文字が入力された場合は区別する
 set incsearch  " 検索文字列が入力途中の段階から検索
 set hlsearch   " 検索文字列のハイライト
 
-" カラースキーム & lightline
+" Colorscheme {{{2
 " let s:cui_colorscheme = 'stonewashed-256'
 " let s:gui_colorscheme = 'stonewashed-gui'
 " let s:lightline_color = 'solarized'
-let s:cui_colorscheme = 'jellybeans'
-let s:gui_colorscheme = 'jellybeans'
-let s:lightline_color = 'jellybeans'
+let s:cui_colorscheme = 'iceberg'
+let s:gui_colorscheme = 'iceberg'
+let s:lightline_color = 'iceberg'
 
 " 上で色設定しておくと，後はよしなにする
 let s:scheme = has('gui_running') && len(s:gui_colorscheme)
       \ ? s:gui_colorscheme : s:cui_colorscheme
-execute 'colorscheme '.s:scheme
+" deinの場合はcolorscheme設定を後で行う必要がある?
+execute 'autocmd vimrc VimEnter * nested colorscheme '.s:scheme
 execute 'autocmd vimrc GUIEnter * nested set t_Co=256 | colorscheme '.s:scheme
 let g:lightline = {'colorscheme' : s:lightline_color}
 let g:lightline.component = {'lineinfo': '%3l[%L]:%-2v'}
@@ -237,7 +250,7 @@ let g:lightline.component = {'lineinfo': '%3l[%L]:%-2v'}
 let g:i_am_not_pika_beast=1
 command! -nargs=0 Colo highlight clear | ColoColo | redraw | colorscheme
 
-" その他
+" Others {{{2
 set modeline          " コメントでvimに指示を出す
 set notimeout         " タイムアウトを無効
 set hidden            " quit時にバッファを削除せず，隠す
@@ -274,9 +287,10 @@ cnoremap <C-a> <C-b>
 
 
 " Others {{{2
-" ホームポジションからコマンド開始
-noremap : ;
-noremap ; :
+" デフォルトに慣れる
+" " ホームポジションからコマンド開始
+" noremap : ;
+" noremap ; :
 
 " 直前のexコマンドを繰り返す (Hack97)
 nnoremap <C-H> q:k<CR>
@@ -314,6 +328,8 @@ nnoremap <expr> tf <SID>ToggleOption('foldmethod','f'
       \,['manual','indent','expr','marker','syntax','diff'])
 nnoremap tb :<C-u>BrightestToggle<CR>
 nnoremap t_ :<C-u>ToggleWhitespace<CR>
+nnoremap tm :call <SID>ToggleMargin()<CR>
+nnoremap tr :<C-u>RainbowParenthesesToggle<CR>
 
 " keyを指定すると最初の呼び出しで変更を行わず，key連打で変更を繰り返す．
 function! s:ToggleOption(option,key,list) "{{{
@@ -323,8 +339,8 @@ function! s:ToggleOption(option,key,list) "{{{
   endif
   while strlen(a:key) == 0 || input ==# a:key
     if len(a:list)
-      execute "let current = &".a:option
-      let i = index(a:list,current)+1
+      execute "let l:current = &".a:option
+      let i = index(a:list,l:current)+1
       let i = i>=len(a:list) ? 0 : i
       execute 'setlocal '.a:option.'='.a:list[i]
     else
@@ -341,11 +357,17 @@ function! s:ToggleOption(option,key,list) "{{{
   return input
 endfunction "}}}
 
-" 全文置換
-" 置換を即実行するものは，ジャンプリストでもとの場所に戻る．
-noremap tr :%s//ge<left><left><left>
-noremap tY :%s/\\/¥/ge<CR><C-o>
-noremap t$ :%s/\v +$//ge<CR>:nohlsearch<CR><C-o>
+" 80文字範囲外塗りつぶしのオンオフ
+function! s:ToggleMargin()
+  let value = &colorcolumn
+  if strlen(value)
+    set colorcolumn=""
+    set colorcolumn?
+  else
+    execute "set colorcolumn=".join(range(&textwidth+1, 999), ',')
+    echo "  colorcolumn=81..."
+  endif
+endfunction
 
 " ヘルプ
 " :h が画面分割でヘルプを開くのに対して, :H で別タブでヘルプを開く
@@ -653,7 +675,12 @@ else
 endif
 let g:vimtex_view_general_options = '@line @pdf @tex'
 
-" " key mapping
+" bibtex
+let g:vimtex_complete_recursive_bib=1 
+" tex編集中に，neocomplete以外の補完で欲しいのはbibtexのcite補完
+autocmd vimrc FileType tex inoremap <C-x> <C-x><C-o>
+
+" key mapping
 autocmd vimrc FileType tex map <buffer> <Space> <localleader>
 nnoremap <silent> <localleader>lt :<C-u>Unite vimtex_toc<CR>
 nnoremap <silent> <localleader>ly :<C-u>Unite vimtex_labels<CR>
@@ -789,5 +816,24 @@ endfunction
 let g:unite_source_alias_aliases.weekly = {
       \"source" : "file_rec", "description" : "weekly note",
       \"args"   : expand(g:weekly_note_dir,':p')}
+
+" plugin making: thinca method {{{2
+" ファイルを開いたときに，そのディレクトリを引数にして関数呼び出し
+autocmd vimrc BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
+
+" locより「上層」にあるvimrc_localを探し，すべて読む．
+function! s:vimrc_local(loc)
+  let files = findfile('vimrc_local.vim', escape(a:loc, ' ') . ';', -1)
+  for i in reverse(filter(files, 'filereadable(v:val)'))
+    source `=i`
+  endfor
+endfunction
+
+" 最初の読み込みでautocmdをセットするため，初回のみここで実行
+if exists('g:loaded_vimrc')
+  call s:vimrc_local(getcwd())
+endif
+let g:loaded_vimrc = 1
+" }}}
 
 " vim: foldmethod=marker
