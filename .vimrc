@@ -10,150 +10,136 @@ augroup END
 
 " Dein {{{1
 " directory
-let s:dein_dir = expand('~/.cache/dein')
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-" install dein itself
-if !isdirectory(s:dein_repo_dir)
-  execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
-endif
-execute 'set runtimepath^=' . s:dein_repo_dir
 
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
+call plug#begin('~/.vim/plugged')
 
 " Shougo-ware {{{2
-  call dein#add('Shougo/dein.vim')
-  call dein#add('Shougo/denite.nvim')
-  call dein#add('Shougo/neocomplete.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/unite.vim')
-  call dein#add('Shougo/vimfiler.vim')
-  call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-  call dein#add('Shougo/vimshell.vim')
-  call dein#add('Shougo/neoinclude.vim')
-  call dein#add('haya14busa/dein-command.vim')
+Plug 'Shougo/dein.vim'
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimfiler.vim'
+Plug 'Shougo/vimproc.vim', {'build': 'make'}
+Plug 'Shougo/vimshell.vim'
+Plug 'Shougo/neoinclude.vim'
+Plug 'haya14busa/dein-command.vim'
 
 " unite source {{{2
-  call dein#add('Shougo/neomru.vim')
-  call dein#add('Shougo/neoyank.vim')
-  call dein#add('Shougo/unite-help')
-  call dein#add('Shougo/unite-outline')
-  call dein#add('haya14busa/unite-reading-vimrc')
-  call dein#add('lambdalisue/unite-linephrase')
-  call dein#add('osyo-manga/unite-fold')
-  call dein#add('osyo-manga/unite-highlight')
-  call dein#add('osyo-manga/unite-qfixhowm')
-  call dein#add('rhysd/unite-codic.vim')
-  call dein#add('sorah/unite-ghq')
-  call dein#add('tacroe/unite-mark')
-  call dein#add('thinca/vim-unite-history')
-  call dein#add('ujihisa/unite-colorscheme')
-  call dein#add('ujihisa/unite-font')
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/neoyank.vim'
+Plug 'Shougo/unite-help'
+Plug 'Shougo/unite-outline'
+Plug 'haya14busa/unite-reading-vimrc'
+Plug 'lambdalisue/unite-linephrase'
+Plug 'osyo-manga/unite-fold'
+Plug 'osyo-manga/unite-highlight'
+Plug 'osyo-manga/unite-qfixhowm'
+Plug 'rhysd/unite-codic.vim'
+Plug 'sorah/unite-ghq'
+Plug 'tacroe/unite-mark'
+Plug 'thinca/vim-unite-history'
+Plug 'ujihisa/unite-colorscheme'
+Plug 'ujihisa/unite-font'
 
 " neocomplete source {{{2
-  call dein#add('Shougo/neco-syntax')
-  call dein#add('Shougo/neco-vim')
-  call dein#add('ujihisa/neco-look')
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neco-vim'
+Plug 'ujihisa/neco-look'
 
 " Vim Command Extension {{{2
-  call dein#add('Konfekt/FastFold')          "neocompleteで折畳みするために
-  call dein#add('LeafCage/foldCC.vim')       "見やすい折りたたみ表示
-  call dein#add('LeafCage/yankround.vim')    "ヤンク履歴を管理
-  call dein#add('easymotion/vim-easymotion') "見えている場所に素早く移動
-  call dein#add('haya14busa/incsearch.vim')  "検索中に対象をハイライト
-  call dein#add('itchyny/lightline.vim')     "ステータスライン拡張
-  call dein#add('kana/vim-niceblock')        "visual modeのI,Aの挙動を矩形選択に
-  call dein#add('kana/vim-submode')          "連打で便利に
-  call dein#add('osyo-manga/vim-anzu')       "検索の一致件数を取得
-  call dein#add('osyo-manga/vim-brightest')  "カーソル下と同じ単語をハイライト
-  call dein#add('osyo-manga/vim-over')       "置換対象をハイライト
-  call dein#add('rhysd/clever-f.vim')        "fの検索後，f連打で次の一致箇所へ
-  call dein#add('sjl/gundo.vim')             "undo履歴の可視化
-  call dein#add('terryma/vim-expand-region') "選択範囲の拡大・縮小
-  call dein#add('thinca/vim-visualstar')     "ビジュアル選択した文字列を検索
-  call dein#add('tpope/vim-repeat')          "動作をリピート可能にする機構を提供
-  call dein#add('vim-jp/vimdoc-ja')          "日本語ヘルプ
-  call dein#add('sjl/gundo.vim')             "履歴の管理
+Plug 'Konfekt/FastFold'          "neocompleteで折畳みするために
+Plug 'LeafCage/foldCC.vim'       "見やすい折りたたみ表示
+Plug 'LeafCage/yankround.vim'    "ヤンク履歴を管理
+Plug 'easymotion/vim-easymotion' "見えている場所に素早く移動
+Plug 'haya14busa/incsearch.vim'  "検索中に対象をハイライト
+Plug 'itchyny/lightline.vim'     "ステータスライン拡張
+Plug 'kana/vim-niceblock'        "visual modeのI,Aの挙動を矩形選択に
+Plug 'kana/vim-submode'          "連打で便利に
+Plug 'osyo-manga/vim-anzu'       "検索の一致件数を取得
+Plug 'osyo-manga/vim-brightest'  "カーソル下と同じ単語をハイライト
+Plug 'osyo-manga/vim-over'       "置換対象をハイライト
+Plug 'rhysd/clever-f.vim'        "fの検索後，f連打で次の一致箇所へ
+Plug 'sjl/gundo.vim'             "undo履歴の可視化
+Plug 'terryma/vim-expand-region' "選択範囲の拡大・縮小
+Plug 'thinca/vim-visualstar'     "ビジュアル選択した文字列を検索
+Plug 'tpope/vim-repeat'          "動作をリピート可能にする機構を提供
+Plug 'vim-jp/vimdoc-ja'          "日本語ヘルプ
+Plug 'sjl/gundo.vim'             "履歴の管理
 
-  call dein#add('haya14busa/vim-asterisk')
-  call dein#add('thinca/vim-quickrun')
+Plug 'haya14busa/vim-asterisk'
+Plug 'thinca/vim-quickrun'
 
 " operator {{{2
-  call dein#add('kana/vim-operator-user')         "operator自作のための機構
-  call dein#add('thinca/vim-operator-sequence')   "複数operatorの統合
-  call dein#add('haya14busa/vim-operator-flashy') "y:ヤンクを可視化
-  call dein#add('kana/vim-operator-replace')      "S:レジスタから貼付け
-  call dein#add('tyru/operator-camelize.vim')     "_:camel-snake入れ替え
+Plug 'kana/vim-operator-user'         "operator自作のための機構
+Plug 'thinca/vim-operator-sequence'   "複数operatorの統合
+Plug 'haya14busa/vim-operator-flashy' "y:ヤンクを可視化
+Plug 'kana/vim-operator-replace'      "S:レジスタから貼付け
+Plug 'tyru/operator-camelize.vim'     "_:camel-snake入れ替え
 
 " text object {{{2
-" builtin w, W, s, p, [, ], (,), <, >, {, }, ", ', `
-" replace q('), d(")
-" vimtex  e, d, c, $, m(math, m=$)
-  call dein#add('kana/vim-textobj-user')             "textobj自作のための機構
-  call dein#add('kana/vim-textobj-entire')           "a:全て(all,e->environment)
-  call dein#add('osyo-manga/vim-textobj-multiblock') "b:囲まれた範囲
-  call dein#add('kana/vim-textobj-fold')             "z:折畳みの範囲
-  call dein#add('kana/vim-textobj-indent')           "i:字下げの範囲
-  call dein#add('kana/vim-textobj-line')             "l:行
-  call dein#add('h1mesuke/textobj-wiw')              "v:snake caseの一部(v+v=w)
-  call dein#add('mattn/vim-textobj-url')             "u:URL
-  call dein#add('thinca/vim-textobj-comment')        "/:コメント
+" builtin w, W, s, p, [, ], (,, <, >, {, }, ",  ', `
+" replace q( ', d("
+" vimtex  e, d, c, $, m(math, m=$
+Plug 'kana/vim-textobj-user'             "textobj自作のための機構
+Plug 'kana/vim-textobj-entire'           "a:全て(all,e->environment
+Plug 'osyo-manga/vim-textobj-multiblock' "b:囲まれた範囲
+Plug 'kana/vim-textobj-fold'             "z:折畳みの範囲
+Plug 'kana/vim-textobj-indent'           "i:字下げの範囲
+Plug 'kana/vim-textobj-line'             "l:行
+Plug 'h1mesuke/textobj-wiw'              "v:snake caseの一部(v+v=w
+Plug 'mattn/vim-textobj-url'             "u:URL
+Plug 'thinca/vim-textobj-comment'        "/:コメント
 
 "scripting {{{2
-  call dein#add('cohama/lexima.vim')         "対括弧補完．古いvimだとIMEに干渉？
-  call dein#add('LeafCage/vimhelpgenerator') "vimプラグインヘルプ生成
-  call dein#add('junegunn/vim-easy-align')   "簡単位置揃え
-  call dein#add('koron/codic-vim')           "プログラマ向け辞書
-  call dein#add('tpope/vim-commentary')      "疑似operatorgc:comment/uncomment
-  call dein#add('tpope/vim-surround')        "疑似textobjs:surroundingの変更削除
-  call dein#add('thinca/vim-prettyprint')    "vimの変数のprettyprint
-  call dein#add('tyru/capture.vim')          "uniteoutputと異なり素バッファ出力
-  call dein#add('AndrewRadev/switch.vim')    "指定したパターンで切り替える
-  call dein#add('ntpeters/vim-better-whitespace') " 行末スペース可視化
+Plug 'cohama/lexima.vim'         "対括弧補完．古いvimだとIMEに干渉？
+Plug 'LeafCage/vimhelpgenerator' "vimプラグインヘルプ生成
+Plug 'junegunn/vim-easy-align'   "簡単位置揃え
+Plug 'koron/codic-vim'           "プログラマ向け辞書
+Plug 'tpope/vim-commentary'      "疑似operatorgc:comment/uncomment
+Plug 'tpope/vim-surround'        "疑似textobjs:surroundingの変更削除
+Plug 'thinca/vim-prettyprint'    "vimの変数のprettyprint
+Plug 'tyru/capture.vim'          "uniteoutputと異なり素バッファ出力
+Plug 'AndrewRadev/switch.vim'    "指定したパターンで切り替える
+Plug 'ntpeters/vim-better-whitespace' " 行末スペース可視化
 
 "git {{{2
-  call dein#add('tpope/vim-fugitive') "vimからgit
-  call dein#add('cohama/agit.vim')    "commit履歴を可視化
-  call dein#add('mattn/gist-vim')     "gistにアクセス
-  call dein#add('mattn/webapi-vim')   "gist-vimのために必要
+Plug 'tpope/vim-fugitive' "vimからgit
+Plug 'cohama/agit.vim'    "commit履歴を可視化
+Plug 'mattn/gist-vim'     "gistにアクセス
+Plug 'mattn/webapi-vim'   "gist-vimのために必要
 
 "language supports {{{2
-  call dein#add('fatih/vim-go')
-  call dein#add('lervag/vimtex')
-  call dein#add('mhaig/vim-blockdiag-series')
-  call dein#add('egison/vim-egison')
-  call dein#add('leseixas/quantum_espresso-vim')
+Plug 'fatih/vim-go'
+Plug 'lervag/vimtex'
+Plug 'mhaig/vim-blockdiag-series'
+Plug 'egison/vim-egison'
+Plug 'leseixas/quantum_espresso-vim'
 
 "memo {{{2
-  call dein#add('fuenor/qfixgrep')
-  call dein#add('fuenor/qfixhowm')
-  call dein#add('glidenote/memolist.vim')
+Plug 'fuenor/qfixgrep'
+Plug 'fuenor/qfixhowm'
+Plug 'glidenote/memolist.vim'
 
 " colorscheme {{{2
-  call dein#add('anekos/colocolo.vim')        "色がコロコロ変わる
-  call dein#add('cocopon/iceberg.vim')        "黒地青基調．
-  call dein#add('flazz/vim-colorschemes')     "カラースキームカタログ
-  call dein#add('popkirby/lightline-iceberg') "lightlineのiceberg
-  call dein#add('rhysd/try-colorscheme.vim')  "インストールせずに試す
+Plug 'anekos/colocolo.vim'        "色がコロコロ変わる
+Plug 'cocopon/iceberg.vim'        "黒地青基調．
+Plug 'flazz/vim-colorschemes'     "カラースキームカタログ
+Plug 'popkirby/lightline-iceberg' "lightlineのiceberg
+Plug 'rhysd/try-colorscheme.vim'  "インストールせずに試す
 
 " others {{{2
-  call dein#add('mattn/excelview-vim')
-  call dein#add('rhysd/github-complete.vim')
-  call dein#add('kien/rainbow_parentheses.vim')
+Plug 'mattn/excelview-vim'
+Plug 'rhysd/github-complete.vim'
+Plug 'kien/rainbow_parentheses.vim'
 
 "my plugins
-  call dein#add('ryotako/unite-latex-package')
-  call dein#add('ryotako/vim-incline')
+Plug 'ryotako/unite-latex-package'
+Plug 'ryotako/vim-incline'
 
-  call dein#end()
-  call dein#save_state()
-endif
+call plug#end()
 
-" install check
-" if !has('vim_starting') && dein#check_install()
-"  call dein#install()
-" endif
 filetype plugin indent on
 syntax enable
 "}}}1
