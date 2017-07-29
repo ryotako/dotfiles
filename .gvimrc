@@ -14,12 +14,13 @@ set guicursor=a:blinkon0
 " Font {{{
 set antialias
 if has("win32") || has("win64")
-  set guifontwide=MeiryoKe_Console:h9
-  set guifont=MeiryoKe_Console:h9
+  set renderoptions=type:directx
+  set guifontwide=MeiryoKe_Console:h11
+  set guifont=MeiryoKe_Console:h11
   set linespace=4
 elseif has("mac")
-  set guifontwide=ricty:h13
-  set guifont=ricty:h13
+  set guifontwide=ricty:h14
+  set guifont=ricty:h14
   set linespace=2
 endif
 "}}}
